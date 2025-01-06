@@ -1,7 +1,22 @@
 <template>
   <div v-if="error">Произошла ошибка при загрузке данных: {{ error.message }}</div>
-  <div v-else>
-    <div v-if="data" class="mb-4 text-3xl font-bold">{{ data.categoryName }}</div>
+  <div v-else-if="data">
+    <div class="mb-4 text-3xl font-bold">{{ data.categoryName }}</div>
+    <div class="my-4 flex items-center">
+      <NuxtLink to="/categories" class="mr-1"><span class="hover:underline">Home</span> /</NuxtLink>
+      <div v-for="(breadcrumb, index) in data.breadcrumbs" :key="breadcrumb.id" class="flex items-center">
+        <NuxtLink
+          :to="`/categories/${breadcrumb.id}`"
+          :class="{
+            'cursor-default text-sky-500': isActiveBreadcrumb(breadcrumb.id),
+            'hover:underline': !isActiveBreadcrumb(breadcrumb.id)
+          }"
+        >
+          {{ breadcrumb.name }}
+        </NuxtLink>
+        <span v-if="index < data.breadcrumbs.length - 1" class="mx-1">/</span>
+      </div>
+    </div>
     <div v-if="status === 'pending'" class="text-center">Loading...</div>
     <div v-else class="grid grid-cols-5 gap-4">
       <div v-for="category in data.categories" :key="category.id">
@@ -35,4 +50,8 @@ const { data, error, status } = await useLazyFetch(`http://127.0.0.1:8000/api/ca
   },
   timeout: 5000
 })
+
+const isActiveBreadcrumb = (breadcrumbId) => {
+  return useRoute().params.slug === String(breadcrumbId)
+}
 </script>
