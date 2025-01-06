@@ -1,9 +1,9 @@
 <template>
-  <div v-if="status === 'pending'" class="text-center">Loading...</div>
-  <div v-else-if="error">Произошла ошибка при загрузке данных: {{ error.message }}</div>
+  <div v-if="error">Произошла ошибка при загрузке данных: {{ error.message }}</div>
   <div v-else>
-    <div class="mb-4 text-3xl font-bold">{{ data.categoryName }}</div>
-    <div class="grid grid-cols-5 gap-4">
+    <div v-if="data" class="mb-4 text-3xl font-bold">{{ data.categoryName }}</div>
+    <div v-if="status === 'pending'" class="text-center">Loading...</div>
+    <div v-else class="grid grid-cols-5 gap-4">
       <div v-for="category in data.categories" :key="category.id">
         <NuxtLink :to="`/categories/${category.id}`">
           <div class="card rounded-lg bg-slate-300 p-4 text-center">
