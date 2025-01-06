@@ -3,3 +3,9 @@
     <span class="text-3xl text-sky-500">Categories</span>
   </div>
 </template>
+
+<script setup>
+useHead({
+  title: 'Categories'
+})
+</script>
