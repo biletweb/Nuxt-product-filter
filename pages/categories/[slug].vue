@@ -6,7 +6,7 @@
     <Meta property="og:title" :content="data.categoryName" />
     <Meta property="og:description" :content="data.categoryName + ' - купить с доставкой по Украине. Выгодные предложения, акции, скидки в интернет-магазине Nuxt 3'" />
     <Meta property="og:type" content="website" />
-    <Meta property="og:url" :content="categoryUrlSeo" />
+    <Meta property="og:url" :content="seoCategoryUrl" />
     <Meta property="og:image" content="http://localhost:3000/favicon.ico" />
   </Head>
 
@@ -42,13 +42,14 @@
 </template>
 
 <script setup>
+const config = useRuntimeConfig()
 const offset = ref(0)
 const limit = 10
 const categorySlug = useRoute().params.slug
-const categoryUrlSeo = 'http://localhost:3000' + useRoute().fullPath
+const seoCategoryUrl = config.public.frontendUrl + useRoute().fullPath
 
 // const { data, error, status } = await useFetch(`http://127.0.0.1:8000/api/categories/${categorySlug}/subcategories`, {
-const { data, error, status } = await useLazyFetch(`http://127.0.0.1:8000/api/categories/${categorySlug}/subcategories`, {
+const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
   query: {
     offset: offset.value,
     limit: limit

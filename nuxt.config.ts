@@ -7,5 +7,11 @@ export default defineNuxtConfig({
     head: {
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
     }
+  },
+  runtimeConfig: {
+    public: {
+      frontendUrl: process.env.FRONTEND_URL,
+      backendUrl: process.env.BACKEND_URL
+    }
   }
 })
