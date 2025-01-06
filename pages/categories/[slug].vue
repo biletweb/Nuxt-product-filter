@@ -1,4 +1,15 @@
 <template>
+  <Head>
+    <Title>{{ data.categoryName }}</Title>
+    <Meta name="description" :content="data.categoryName + ' - купить в интернет магазине ⏩ Nuxt 3. Цены на 【' + data.categoryName + '】, высокое качество, ✍️️ отзывы, ⚡ быстрая доставка по всей Украине, ✨ 【ГАРАНТИЯ】!'" />
+    <Meta name="keywords" :content="data.categoryName + ', купить ' + data.categoryName.toLowerCase() + ', цены на ' + data.categoryName.toLowerCase() + ''" />
+    <Meta property="og:title" :content="data.categoryName" />
+    <Meta property="og:description" :content="data.categoryName + ' - купить с доставкой по Украине. Выгодные предложения, акции, скидки в интернет-магазине Nuxt 3'" />
+    <Meta property="og:type" content="website" />
+    <Meta property="og:url" :content="'http://localhost:3000' + useRoute().fullPath" />
+    <Meta property="og:image" content="http://localhost:3000/favicon.ico" />
+  </Head>
+
   <div v-if="error">Произошла ошибка при загрузке данных: {{ error.message }}</div>
   <div v-else-if="data">
     <div class="mb-4 text-3xl font-bold">{{ data.categoryName }}</div>
@@ -31,10 +42,6 @@
 </template>
 
 <script setup>
-useHead({
-  title: 'Category slug'
-})
-
 const offset = ref(0)
 const limit = 10
 const categorySlug = useRoute().params.slug
