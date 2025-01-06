@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span class="text-3xl text-sky-500">Category slug: {{ $route.params.slug }}</span>
+    <div class="mb-4 text-3xl font-bold">Category slug: {{ $route.params.slug }}</div>
   </div>
 </template>
 
