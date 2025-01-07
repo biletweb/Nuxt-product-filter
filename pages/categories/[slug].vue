@@ -44,26 +44,10 @@
     </div>
     <div v-if="status !== 'pending' && data.categoryFilters.length" class="my-4 flex gap-4">
       <div class="w-2/12">
-        <div class="rounded-lg border border-sky-300 bg-sky-200 p-4">
-          <div
-            v-for="(filter, index) in data.categoryFilters"
-            :key="filter.id"
-            :class="{ 'mb-2': index !== data.categoryFilters.length - 1 }"
-          >
-            <span class="font-bold">{{ filter.name }}</span>
-            <div v-for="value in filter.values" :key="value.id" class="flex items-center">
-              <input type="checkbox" :value="value.id" :id="value.id" />
-              <label :for="value.id" class="ms-1">{{ value.value }}</label>
-            </div>
-          </div>
-        </div>
+        <CategoryFilters :category-filters="data.categoryFilters" />
       </div>
       <div class="w-10/12">
-        <div class="grid grid-cols-5 gap-4">
-          <div v-for="product in data.products" :key="product.id">
-            <ProductCard :product="product" />
-          </div>
-        </div>
+        <ProductCard :products="data.products" />
       </div>
     </div>
   </div>
