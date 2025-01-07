@@ -1,14 +1,34 @@
 <template>
   <Head v-if="data">
     <Title>{{ data.categoryName }} - NUXT 3 | Купить в Киеве, Харькове, Одессе, Львове: цена, отзывы, продажа</Title>
-    <Meta name="description" :content="data.categoryName + ' - купить в интернет магазине ⏩ Nuxt 3. Высокое качество, ✍️️ отзывы, ⚡ быстрая доставка по всей Украине, ✨ [ГАРАНТИЯ]!'" />
-    <Meta name="keywords" :content="data.categoryName.toLowerCase() + ', купить ' + data.categoryName.toLowerCase() + ', цены на ' + data.categoryName.toLowerCase() + ''" />
+    <Meta
+      name="description"
+      :content="
+        data.categoryName +
+        ' - купить в интернет магазине ⏩ Nuxt 3. Высокое качество, ✍️️ отзывы, ⚡ быстрая доставка по всей Украине, ✨ [ГАРАНТИЯ]!'
+      "
+    />
+    <Meta
+      name="keywords"
+      :content="
+        data.categoryName.toLowerCase() +
+        ', купить ' +
+        data.categoryName.toLowerCase() +
+        ', цены на ' +
+        data.categoryName.toLowerCase() +
+        ''
+      "
+    />
     <Meta property="og:title" :content="data.categoryName" />
-    <Meta property="og:description" :content="data.categoryName + ' - купить с доставкой по Украине. Выгодные предложения, акции, скидки в интернет-магазине Nuxt 3'" />
+    <Meta
+      property="og:description"
+      :content="
+        data.categoryName + ' - купить с доставкой по Украине. Выгодные предложения, акции, скидки в интернет-магазине Nuxt 3'
+      "
+    />
     <Meta property="og:url" :content="seoUrl" />
   </Head>
-
-  <div v-if="error">Произошла ошибка при загрузке данных: {{ error.message }}</div>
+  <ErrorMessage v-if="error" :error="error.statusCode" />
   <div v-else-if="data">
     <div class="my-4 text-3xl font-bold">{{ data.categoryName }}</div>
     <Breadcrumbs :breadcrumbs="data.breadcrumbs" />
@@ -41,6 +61,6 @@ const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/
   headers: {
     Accept: 'application/json'
   },
-  timeout: 5000
+  timeout: 50
 })
 </script>

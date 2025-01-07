@@ -2,7 +2,7 @@
   <Head>
     <Title>Categories | Купить в Киеве, Харькове, Одессе, Львове: цена, отзывы, продажа</Title>
   </Head>
-  <div v-if="error">Произошла ошибка при загрузке данных: {{ error.message }}</div>
+  <ErrorMessage v-if="error" :error="error.message" />
   <div v-else>
     <div class="my-4 text-3xl font-bold">Categories</div>
     <div v-if="status === 'pending'" class="text-center">Loading...</div>
