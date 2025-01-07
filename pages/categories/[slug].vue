@@ -1,10 +1,10 @@
 <template>
   <Head v-if="data">
     <Title>{{ data.categoryName }} - NUXT 3 | Купить в Киеве, Харькове, Одессе, Львове: цена, отзывы, продажа</Title>
-    <Meta name="description" :content="data.categoryName + ' - купить в интернет магазине ⏩ Nuxt 3. Высокое качество, ✍️️ отзывы, ⚡ быстрая доставка по всей Украине, ✨ [ГАРАНТИЯ]!'" />
-    <Meta name="keywords" :content="data.categoryName.toLowerCase() + ', купить ' + data.categoryName.toLowerCase() + ', цены на ' + data.categoryName.toLowerCase()" />
+    <Meta name="description" :content="data.description" />
+    <Meta name="keywords" :content="data.keywords" />
     <Meta property="og:title" :content="data.categoryName" />
-    <Meta property="og:description" :content="data.categoryName + ' - купить с доставкой по Украине. Выгодные предложения, акции, скидки в интернет-магазине Nuxt 3'" />
+    <Meta property="og:description" :content="data.ogDescription" />
     <Meta property="og:url" :content="seoUrl" />
   </Head>
 
