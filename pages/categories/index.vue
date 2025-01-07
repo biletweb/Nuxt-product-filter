@@ -1,4 +1,7 @@
 <template>
+  <Head>
+    <Title>Categories</Title>
+  </Head>
   <div v-if="error">Произошла ошибка при загрузке данных: {{ error.message }}</div>
   <div v-else>
     <div class="my-4 text-3xl font-bold">Categories</div>
@@ -16,10 +19,6 @@
 </template>
 
 <script setup>
-useHead({
-  title: 'Categories'
-})
-
 const config = useRuntimeConfig()
 
 // const { data, status } = await useFetch(config.public.backendUrl + `/categories`)
