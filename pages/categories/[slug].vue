@@ -33,21 +33,13 @@
     <div class="my-4 text-3xl font-bold">{{ data.categoryName }}</div>
     <Breadcrumbs :breadcrumbs="data.breadcrumbs" />
     <div v-if="status === 'pending'" class="text-center">Loading...</div>
-    <div v-else-if="data.categories.length" class="grid grid-cols-5 gap-4">
-      <div v-for="category in data.categories" :key="category.id">
-        <NuxtLink :to="`/categories/${category.slug}`">
-          <div class="card rounded-lg bg-slate-300 p-4 text-center">
-            {{ category.name }}
-          </div>
-        </NuxtLink>
-      </div>
-    </div>
+    <CategoryList v-else-if="data.categories.length" :categories="data.categories" />
     <div v-if="status !== 'pending' && data.categoryFilters.length" class="my-4 flex gap-4">
       <div class="w-2/12">
         <CategoryFilters :category-filters="data.categoryFilters" />
       </div>
       <div class="w-10/12">
-        <ProductCard :products="data.products" />
+        <ProductList :products="data.products" />
       </div>
     </div>
   </div>
