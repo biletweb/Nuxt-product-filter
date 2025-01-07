@@ -1,6 +1,6 @@
 <template>
   <Head v-if="data">
-    <Title>{{ data.categoryName }} - NUXT 3 | Купить в Киеве, Харькове, Одессе, Львове: цена, отзывы, продажа</Title>
+    <Title>{{ data.categoryName }} - NUXT 3</Title>
     <Meta name="description" :content="data.description" />
     <Meta name="keywords" :content="data.keywords" />
     <Meta property="og:title" :content="data.categoryName" />
