@@ -1,6 +1,6 @@
 <template>
   <Head>
-    <Title>Categories</Title>
+    <Title>Categories | Купить в Киеве, Харькове, Одессе, Львове: цена, отзывы, продажа</Title>
   </Head>
   <div v-if="error">Произошла ошибка при загрузке данных: {{ error.message }}</div>
   <div v-else>
