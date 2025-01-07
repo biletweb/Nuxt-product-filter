@@ -8,9 +8,3 @@
     <Footer />
   </div>
 </template>
-
-<style>
-body {
-  background-color: rgb(226 232 240);
-}
-</style>
