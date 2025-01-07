@@ -61,6 +61,6 @@ const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/
   headers: {
     Accept: 'application/json'
   },
-  timeout: 50
+  timeout: 5000
 })
 </script>
