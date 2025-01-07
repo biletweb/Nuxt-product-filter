@@ -6,10 +6,12 @@
         <nav>
           <ul class="flex items-center gap-4">
             <li>
-              <NuxtLink to="/" class="text-sky-500 hover:text-sky-600" active-class="text-sky-600">Home</NuxtLink>
+              <!-- <NuxtLink to="/" class="text-sky-500 hover:text-sky-600" active-class="text-red-500">Home</NuxtLink> -->
+              <NuxtLink to="/" class="text-sky-500 duration-300 hover:text-sky-600">Home</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/categories" class="text-sky-500 hover:text-sky-600" active-class="text-sky-600">Categories</NuxtLink>
+              <!-- <NuxtLink to="/categories" class="text-sky-500 hover:text-sky-600" active-class="text-red-500">Categories</NuxtLink> -->
+              <NuxtLink to="/categories" class="text-sky-500 duration-300 hover:text-sky-600">Categories</NuxtLink>
             </li>
           </ul>
         </nav>
