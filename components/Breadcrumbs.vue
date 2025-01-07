@@ -3,10 +3,10 @@
     <NuxtLink to="/categories" class="mr-1"><span class="hover:underline">Home</span> /</NuxtLink>
     <div v-for="(breadcrumb, index) in breadcrumbs" :key="breadcrumb.id" class="flex items-center">
       <NuxtLink
-        :to="`/categories/${breadcrumb.id}`"
+        :to="`/categories/${breadcrumb.slug}`"
         :class="{
-          'cursor-default text-sky-500': isActiveBreadcrumb(breadcrumb.id),
-          'hover:underline': !isActiveBreadcrumb(breadcrumb.id)
+          'cursor-default text-sky-500': isActiveBreadcrumb(breadcrumb.slug),
+          'hover:underline': !isActiveBreadcrumb(breadcrumb.slug)
         }"
       >
         {{ breadcrumb.name }}
@@ -24,7 +24,7 @@ const props = defineProps({
   }
 })
 
-const isActiveBreadcrumb = (breadcrumbId) => {
-  return useRoute().params.slug === String(breadcrumbId)
+const isActiveBreadcrumb = (breadcrumbSlug) => {
+  return useRoute().params.slug === String(breadcrumbSlug)
 }
 </script>
