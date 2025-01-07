@@ -61,9 +61,7 @@
       <div class="w-10/12">
         <div class="grid grid-cols-5 gap-4">
           <div v-for="product in data.products" :key="product.id" class="rounded-lg bg-slate-300 p-4">
-            {{ product.name }}
-            <hr class="my-2" />
-            <span>Цена: {{ product.price }}</span>
+            <ProductCard :product="product" />
           </div>
         </div>
       </div>
