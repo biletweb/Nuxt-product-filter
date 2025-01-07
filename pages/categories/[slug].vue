@@ -63,7 +63,4 @@ const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/
   },
   timeout: 5000
 })
-if (data.value) {
-  console.log(data.value.breadcrumbs)
-}
 </script>

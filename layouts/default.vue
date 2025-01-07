@@ -1,4 +1,5 @@
 <template>
+  <NuxtLoadingIndicator :height="5" color="#00dc82" :duration="3000" />
   <div class="container mx-auto flex min-h-screen flex-col">
     <Header />
     <main class="flex-grow">
