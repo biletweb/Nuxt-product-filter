@@ -52,8 +52,8 @@ const limit = 10
 const categorySlug = useRoute().params.slug
 const seoCategoryUrl = config.public.frontendUrl + useRoute().fullPath
 
-// const { data, error, status } = await useFetch(`http://127.0.0.1:8000/api/categories/${categorySlug}/subcategories`, {
-const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
+const { data, error, status } = await useFetch(`http://127.0.0.1:8000/api/categories/${categorySlug}/subcategories`, {
+// const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
   query: {
     offset: offset.value,
     limit: limit

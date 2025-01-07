@@ -20,6 +20,6 @@ useHead({
   title: 'Categories'
 })
 
-// const { data, status } = await useFetch('http://127.0.0.1:8000/api/categories')
-const { data, error, status } = await useLazyFetch('http://127.0.0.1:8000/api/categories')
+const { data, status } = await useFetch('http://127.0.0.1:8000/api/categories')
+// const { data, error, status } = await useLazyFetch('http://127.0.0.1:8000/api/categories')
 </script>
