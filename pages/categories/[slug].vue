@@ -30,11 +30,8 @@
 
   <div v-if="error">Произошла ошибка при загрузке данных: {{ error.message }}</div>
   <div v-else-if="data">
-    <div class="mb-4 text-3xl font-bold">{{ data.categoryName }}</div>
-    <div class="my-4 flex items-center">
-      <NuxtLink to="/categories" class="mr-1"><span class="hover:underline">Home</span> /</NuxtLink>
-      <Breadcrumbs :breadcrumbs="data.breadcrumbs" />
-    </div>
+    <div class="my-4 text-3xl font-bold">{{ data.categoryName }}</div>
+    <Breadcrumbs :breadcrumbs="data.breadcrumbs" />
     <div v-if="status === 'pending'" class="text-center">Loading...</div>
     <div v-else class="grid grid-cols-5 gap-4">
       <div v-for="category in data.categories" :key="category.id">
@@ -66,8 +63,7 @@ const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/
   },
   timeout: 5000
 })
-if (data.value){
-
+if (data.value) {
   console.log(data.value.breadcrumbs)
 }
 </script>
