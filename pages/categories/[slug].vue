@@ -44,12 +44,12 @@
     </div>
     <div v-if="status !== 'pending' && data.categoryFilters.length" class="my-4 flex gap-4">
       <div class="w-2/12">
-        <div class="rounded-lg border border-sky-300 bg-sky-200">
-          <div v-for="filter in data.categoryFilters" :key="filter.id" class="px-4 py-2">
+        <div class="rounded-lg border border-sky-300 bg-sky-200 p-4">
+          <div v-for="filter in data.categoryFilters" :key="filter.id">
             <span class="font-bold">{{ filter.name }}</span>
             <div v-for="value in filter.values" :key="value.id" class="flex items-center">
-              <input type="checkbox" :value="value.id" />
-              <span class="mx-2">{{ value.value }}</span>
+              <input type="checkbox" :value="value.id" :id="value.id" />
+              <label :for="value.id" class="ms-1">{{ value.value }}</label>
             </div>
           </div>
         </div>
