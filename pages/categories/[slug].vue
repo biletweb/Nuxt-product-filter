@@ -1,31 +1,11 @@
 <template>
   <Head v-if="data">
     <Title>{{ data.categoryName }}</Title>
-    <Meta
-      name="description"
-      :content="
-        data.categoryName +
-        ' - купить в интернет магазине ⏩ Nuxt 3. Цены на 【' +
-        data.categoryName +
-        '】, высокое качество, ✍️️ отзывы, ⚡ быстрая доставка по всей Украине, ✨ 【ГАРАНТИЯ】!'
-      "
-    />
-    <Meta
-      name="keywords"
-      :content="
-        data.categoryName + ', купить ' + data.categoryName.toLowerCase() + ', цены на ' + data.categoryName.toLowerCase() + ''
-      "
-    />
+    <Meta name="description" :content="data.categoryName + ' - купить в интернет магазине ⏩ Nuxt 3. Цены на 【' + data.categoryName + '】, высокое качество, ✍️️ отзывы, ⚡ быстрая доставка по всей Украине, ✨ 【ГАРАНТИЯ】!'" />
+    <Meta name="keywords" :content="data.categoryName + ', купить ' + data.categoryName.toLowerCase() + ', цены на ' + data.categoryName.toLowerCase() + ''" />
     <Meta property="og:title" :content="data.categoryName" />
-    <Meta
-      property="og:description"
-      :content="
-        data.categoryName + ' - купить с доставкой по Украине. Выгодные предложения, акции, скидки в интернет-магазине Nuxt 3'
-      "
-    />
-    <Meta property="og:type" content="website" />
-    <Meta property="og:url" :content="seoCategoryUrl" />
-    <Meta property="og:image" content="http://localhost:3000/favicon.ico" />
+    <Meta property="og:description" :content="data.categoryName + ' - купить с доставкой по Украине. Выгодные предложения, акции, скидки в интернет-магазине Nuxt 3'" />
+    <Meta property="og:url" :content="seoUrl" />
   </Head>
 
   <div v-if="error">Произошла ошибка при загрузке данных: {{ error.message }}</div>
@@ -50,7 +30,7 @@ const config = useRuntimeConfig()
 const offset = ref(0)
 const limit = 10
 const categorySlug = useRoute().params.slug
-const seoCategoryUrl = config.public.frontendUrl + useRoute().fullPath
+const seoUrl = config.public.frontendUrl + useRoute().fullPath
 
 // const { data, error, status } = await useFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
 const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {

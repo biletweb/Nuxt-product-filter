@@ -4,8 +4,8 @@
   </div>
 </template>
 
-<script setup>
+<!-- <script setup>
 useHead({
   title: 'Product Filter'
 })
-</script>
+</script> -->
