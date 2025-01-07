@@ -60,7 +60,7 @@
       </div>
       <div class="w-10/12">
         <div class="grid grid-cols-5 gap-4">
-          <div v-for="product in data.products" :key="product.id" class="rounded-lg bg-slate-300 p-4">
+          <div v-for="product in data.products" :key="product.id">
             <ProductCard :product="product" />
           </div>
         </div>
