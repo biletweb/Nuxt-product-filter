@@ -33,13 +33,36 @@
     <div class="my-4 text-3xl font-bold">{{ data.categoryName }}</div>
     <Breadcrumbs :breadcrumbs="data.breadcrumbs" />
     <div v-if="status === 'pending'" class="text-center">Loading...</div>
-    <div v-else class="grid grid-cols-5 gap-4">
+    <div v-else-if="data.categories.length" class="grid grid-cols-5 gap-4">
       <div v-for="category in data.categories" :key="category.id">
         <NuxtLink :to="`/categories/${category.slug}`">
           <div class="card rounded-lg bg-slate-300 p-4 text-center">
             {{ category.name }}
           </div>
         </NuxtLink>
+      </div>
+    </div>
+    <div v-if="status !== 'pending' && data.categoryFilters.length" class="my-4 flex gap-4">
+      <div class="w-2/12">
+        <div class="rounded-lg border border-sky-300 bg-sky-200">
+          <div v-for="filter in data.categoryFilters" :key="filter.id" class="px-4 py-2">
+            <span class="font-bold">{{ filter.name }}</span>
+            <div v-for="value in filter.values" :key="value.id" class="flex items-center">
+              <input type="checkbox" :value="value.id" />
+              <span class="mx-2">{{ value.value }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-10/12">
+        <div class="grid grid-cols-5 gap-4">
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+        </div>
       </div>
     </div>
   </div>
