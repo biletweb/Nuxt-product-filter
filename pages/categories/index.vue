@@ -1,6 +1,6 @@
 <template>
   <Head>
-    <Title>Categories | Купить в Киеве, Харькове, Одессе, Львове: цена, отзывы, продажа</Title>
+    <Title>Categories - NUXT 3</Title>
   </Head>
   <ErrorMessage v-if="error" :error="error.statusCode" />
   <div v-else>
