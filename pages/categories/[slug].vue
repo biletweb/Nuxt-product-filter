@@ -53,6 +53,10 @@ const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/
   timeout: 5000
 })
 
+if (data.value) {
+  hasMore.value = data.value.products.length >= limit
+}
+
 const loadMore = async () => {
   loadingHasMore.value = true
   offset.value += limit
@@ -64,7 +68,6 @@ const loadMore = async () => {
     timeout: 5000
   })
   data.value.products = [...data.value.products, ...response.products]
-  console.log(response.products)
   hasMore.value = response.products.length >= limit
   loadingHasMore.value = false
 }
