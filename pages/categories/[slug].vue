@@ -86,7 +86,17 @@ const loadMore = async () => {
   }
 }
 
-const filterChange = (filters) => {
-  console.log('Filters changed:', filters)
+const filterChange = async (filters) => {
+  const params = {}
+  for (const [filterId, selectedValues] of Object.entries(filters)) {
+    params[`filters[${filterId}][]`] = selectedValues
+  }
+  params.offset = offset.value
+  params.limit = limit
+  const response = await $fetch(config.public.backendUrl + `/categories/${categorySlug}/products/filter`, {
+    params: params,
+    timeout: 5000
+  })
+  data.value.products = response.products
 }
 </script>
