@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-full flex-col rounded-lg border border-slate-300 bg-slate-100 p-4">
-    <div class="mb-4 flex items-center justify-between">
-      <span class="rounded-lg bg-rose-500 px-2 py-1 text-xs text-white">SALE</span>
+    <div class="mb-4 flex" :class="{ 'items-center justify-between': product.sale_price, 'justify-end': !product.sale_price }">
+      <span v-if="product.sale_price" class="rounded-lg bg-rose-500 px-2 py-1 text-xs text-white">SALE</span>
       <Icon
         @click="toggleFavorite(product.id)"
         :name="isFavorite ? 'mingcute:heart-fill' : 'mingcute:heart-line'"
