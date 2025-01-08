@@ -87,6 +87,7 @@ const loadMore = async () => {
 }
 
 const filterChange = async (filters) => {
+  offset.value = 0
   const params = {}
   for (const [filterId, selectedValues] of Object.entries(filters)) {
     params[`filters[${filterId}][]`] = selectedValues
@@ -98,5 +99,6 @@ const filterChange = async (filters) => {
     timeout: 5000
   })
   data.value.products = response.products
+  hasMore.value = response.products.length >= limit
 }
 </script>
