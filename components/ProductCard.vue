@@ -17,7 +17,7 @@
     </div>
     <div class="flex items-end justify-between">
       <div class="flex flex-col">
-        <span class="text-sm text-slate-400 line-through">{{ product.price }} ₴</span>
+        <span v-if="product.sale_price" class="text-sm text-slate-400 line-through">{{ product.sale_price }} ₴</span>
         <span class="-mt-1 font-semibold">{{ product.price }} ₴</span>
       </div>
       <Icon
