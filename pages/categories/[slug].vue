@@ -60,15 +60,23 @@ if (data.value) {
 const loadMore = async () => {
   loadingHasMore.value = true
   offset.value += limit
-  const response = await $fetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
-    params: {
-      offset: offset.value,
-      limit: limit
-    },
-    timeout: 5000
-  })
-  data.value.products = [...data.value.products, ...response.products]
-  hasMore.value = response.products.length >= limit
-  loadingHasMore.value = false
+  try {
+    const response = await $fetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
+      params: {
+        offset: offset.value,
+        limit: limit
+      },
+      timeout: 5
+    })
+    data.value.products = [...data.value.products, ...response.products]
+    hasMore.value = response.products.length >= limit
+  } catch (err) {
+    error.value = {
+      statusCode: 500,
+      statusMessage: err.statusMessage
+    }
+  } finally {
+    loadingHasMore.value = false
+  }
 }
 </script>
