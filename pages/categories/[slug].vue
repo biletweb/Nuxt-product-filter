@@ -19,7 +19,9 @@
         <CategoryFilters :category-filters="data.categoryFilters" @filterChange="filterChange($event)" />
       </div>
       <div class="w-10/12">
-        <div v-if="loadingChangeFilters" class="text-center">Loading...</div>
+        <div v-if="loadingChangeFilters" class="flex justify-center">
+          <Icon name="svg-spinners:8-dots-rotate" size="36px" class="text-sky-500" />
+        </div>
         <ProductList v-else :products="data.products" />
         <div v-if="hasMore && !loadingChangeFilters" class="mt-4 text-center">
           <button
