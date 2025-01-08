@@ -88,6 +88,7 @@ const loadMore = async () => {
 
 const filterChange = async (filters) => {
   offset.value = 0
+  try {
   const params = {}
   for (const [filterId, selectedValues] of Object.entries(filters)) {
     params[`filters[${filterId}][]`] = selectedValues
@@ -100,5 +101,11 @@ const filterChange = async (filters) => {
   })
   data.value.products = response.products
   hasMore.value = response.products.length >= limit
+  } catch (err) {
+    error.value = {
+      statusCode: 500,
+      statusMessage: err.statusMessage
+    }
+  }
 }
 </script>
