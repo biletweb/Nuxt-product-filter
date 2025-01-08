@@ -2,7 +2,12 @@
   <div class="rounded-lg border border-slate-300 bg-slate-100 p-4">
     <div class="mb-4 flex items-center justify-between">
       <span class="rounded-lg bg-rose-500 px-2 py-1 text-xs text-white">SALE</span>
-      <Icon name="mingcute:heart-line" class="text-yellow-500 hover:cursor-pointer hover:text-yellow-600" size="24px" />
+      <Icon
+        @click="toggleFavorite(product.id)"
+        :name="isFavorite ? 'mingcute:heart-fill' : 'mingcute:heart-line'"
+        class="text-yellow-500 hover:cursor-pointer"
+        size="24px"
+      />
     </div>
     <div class="mb-4">
       <NuxtImg src="/tv2.webp" width="210" height="120" />
@@ -27,4 +32,11 @@ const props = defineProps({
     required: true
   }
 })
+
+const isFavorite = ref(false)
+
+const toggleFavorite = (productId) => {
+  isFavorite.value = !isFavorite.value
+  console.log('Favorite toggled for product ID: ', productId, isFavorite.value)
+}
 </script>
