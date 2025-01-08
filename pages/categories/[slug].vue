@@ -20,9 +20,8 @@
       </div>
       <div class="w-10/12">
         <ProductList :products="data.products" />
-        <div class="mt-4 text-center">
+        <div v-if="hasMore" class="mt-4 text-center">
           <button
-            v-if="hasMore"
             @click="loadMore"
             type="button"
             class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600 disabled:bg-slate-300"
