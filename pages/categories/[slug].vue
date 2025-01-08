@@ -66,7 +66,7 @@ const loadMore = async () => {
         offset: offset.value,
         limit: limit
       },
-      timeout: 5
+      timeout: 5000
     })
     data.value.products = [...data.value.products, ...response.products]
     hasMore.value = response.products.length >= limit
