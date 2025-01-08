@@ -8,7 +8,7 @@
       <NuxtImg src="/tv2.webp" width="210" height="120" />
     </div>
     <div class="mb-4">
-      {{ product.name }}
+      <span class="hover:cursor-pointer hover:text-sky-500">{{ product.name }}</span>
     </div>
     <div class="flex items-end justify-between">
       <div class="flex flex-col">
