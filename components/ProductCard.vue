@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-lg border border-slate-300 bg-slate-100 p-4 h-full">
+  <div class="flex h-full flex-col rounded-lg border border-slate-300 bg-slate-100 p-4">
     <div class="mb-4 flex items-center justify-between">
       <span class="rounded-lg bg-rose-500 px-2 py-1 text-xs text-white">SALE</span>
       <Icon
@@ -12,7 +12,7 @@
     <div class="mb-4">
       <NuxtImg src="/tv2.webp" width="210" height="120" />
     </div>
-    <div class="mb-4">
+    <div class="mb-4 flex-grow">
       <span class="hover:cursor-pointer hover:text-sky-500">{{ product.name }}</span>
     </div>
     <div class="flex items-end justify-between">
