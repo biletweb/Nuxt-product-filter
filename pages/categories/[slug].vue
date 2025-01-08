@@ -19,8 +19,9 @@
         <CategoryFilters :category-filters="data.categoryFilters" @filterChange="filterChange($event)" />
       </div>
       <div class="w-10/12">
-        <ProductList :products="data.products" />
-        <div v-if="hasMore" class="mt-4 text-center">
+        <div v-if="loadingChangeFilters" class="text-center">Loading...</div>
+        <ProductList v-else :products="data.products" />
+        <div v-if="hasMore && !loadingChangeFilters" class="mt-4 text-center">
           <button
             @click="loadMore"
             type="button"
@@ -44,6 +45,7 @@ const offset = ref(0)
 const limit = 10
 const hasMore = ref(true)
 const loadingHasMore = ref(false)
+const loadingChangeFilters = ref(false)
 
 const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
   query: {
@@ -87,25 +89,28 @@ const loadMore = async () => {
 }
 
 const filterChange = async (filters) => {
+  loadingChangeFilters.value = true
   offset.value = 0
   try {
-  const params = {}
-  for (const [filterId, selectedValues] of Object.entries(filters)) {
-    params[`filters[${filterId}][]`] = selectedValues
-  }
-  params.offset = offset.value
-  params.limit = limit
-  const response = await $fetch(config.public.backendUrl + `/categories/${categorySlug}/products/filter`, {
-    params: params,
-    timeout: 5000
-  })
-  data.value.products = response.products
-  hasMore.value = response.products.length >= limit
+    const params = {}
+    for (const [filterId, selectedValues] of Object.entries(filters)) {
+      params[`filters[${filterId}][]`] = selectedValues
+    }
+    params.offset = offset.value
+    params.limit = limit
+    const response = await $fetch(config.public.backendUrl + `/categories/${categorySlug}/products/filter`, {
+      params: params,
+      timeout: 5000
+    })
+    data.value.products = response.products
+    hasMore.value = response.products.length >= limit
   } catch (err) {
     error.value = {
       statusCode: 500,
       statusMessage: err.statusMessage
     }
+  } finally {
+    loadingChangeFilters.value = false
   }
 }
 </script>
