@@ -5,7 +5,7 @@
       <Icon name="mingcute:heart-line" class="text-yellow-500 hover:cursor-pointer hover:text-yellow-600" size="24px" />
     </div>
     <div class="mb-4">
-      <NuxtImg src="/tv.webp" width="210" height="120" />
+      <NuxtImg src="/tv2.webp" width="210" height="120" />
     </div>
     <div class="mb-4">
       {{ product.name }}
