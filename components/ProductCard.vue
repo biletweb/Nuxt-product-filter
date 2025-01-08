@@ -20,7 +20,12 @@
         <span class="text-sm text-slate-400 line-through">{{ product.price }} ₴</span>
         <span class="-mt-1 font-semibold">{{ product.price }} ₴</span>
       </div>
-      <Icon name="mingcute:shopping-cart-2-line" class="text-green-500 hover:cursor-pointer hover:text-green-600" size="24px" />
+      <Icon
+        @click="toggleCart(product.id)"
+        :name="isInCart ? 'mingcute:shopping-cart-2-fill' : 'mingcute:shopping-cart-2-line'"
+        class="text-green-500 hover:cursor-pointer"
+        size="24px"
+      />
     </div>
   </div>
 </template>
@@ -34,9 +39,15 @@ const props = defineProps({
 })
 
 const isFavorite = ref(false)
+const isInCart = ref(false)
 
 const toggleFavorite = (productId) => {
   isFavorite.value = !isFavorite.value
   console.log('Favorite toggled for product ID: ', productId, isFavorite.value)
+}
+
+const toggleCart = (productId) => {
+  isInCart.value = !isInCart.value
+  console.log('Cart toggled for product ID: ', productId, isInCart.value)
 }
 </script>
