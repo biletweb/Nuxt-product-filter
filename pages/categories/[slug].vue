@@ -41,11 +41,15 @@ const config = useRuntimeConfig()
 const categorySlug = useRoute().params.slug
 const seoUrl = config.public.frontendUrl + useRoute().fullPath
 const offset = ref(0)
-const limit = 10
+const limit = 1
 const hasMore = ref(true)
 const loadingHasMore = ref(false)
 
 const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
+  query: {
+    offset: offset.value,
+    limit: limit
+  },
   timeout: 5000
 })
 
