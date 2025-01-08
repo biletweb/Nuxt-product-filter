@@ -16,7 +16,7 @@
     <CategoryList v-else-if="data.categories.length" :categories="data.categories" />
     <div v-if="status !== 'pending' && data.categoryFilters.length" class="my-4 flex gap-4">
       <div class="w-2/12">
-        <CategoryFilters :category-filters="data.categoryFilters" />
+        <CategoryFilters :category-filters="data.categoryFilters" @filterChange="filterChange($event)" />
       </div>
       <div class="w-10/12">
         <ProductList :products="data.products" />
@@ -84,5 +84,9 @@ const loadMore = async () => {
   } finally {
     loadingHasMore.value = false
   }
+}
+
+const filterChange = (filters) => {
+  console.log('Filters changed:', filters)
 }
 </script>

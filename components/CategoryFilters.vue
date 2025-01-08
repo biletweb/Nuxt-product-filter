@@ -3,7 +3,12 @@
     <div v-for="(filter, index) in categoryFilters" :key="filter.id" :class="{ 'mb-2': index !== categoryFilters.length - 1 }">
       <span class="font-bold">{{ filter.name }}</span>
       <div v-for="value in filter.values" :key="value.id" class="flex items-center">
-        <input type="checkbox" :value="value.id" :id="value.id" @change="handleFilterChange(filter.id, value.id)" />
+        <input
+          type="checkbox"
+          :value="value.id"
+          :id="value.id"
+          @change="(handleFilterChange(filter.id, value.id), submitFilters())"
+        />
         <label :for="value.id" class="ms-1">{{ value.value }}</label>
       </div>
     </div>
@@ -18,6 +23,7 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['filterChange'])
 const selectedFilters = reactive({})
 
 const handleFilterChange = (filterId, valueId) => {
@@ -34,5 +40,9 @@ const handleFilterChange = (filterId, valueId) => {
   } else {
     filter.push(valueId)
   }
+}
+
+const submitFilters = () => {
+  emit('filterChange', selectedFilters)
 }
 </script>
