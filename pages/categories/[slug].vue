@@ -27,20 +27,21 @@
 
 <script setup>
 const config = useRuntimeConfig()
-const offset = ref(0)
-const limit = 10
+// const offset = ref(0)
+// const limit = 10
 const categorySlug = useRoute().params.slug
 const seoUrl = config.public.frontendUrl + useRoute().fullPath
 
 // const { data, error, status } = await useFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
-const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
-  query: {
-    offset: offset.value,
-    limit: limit
-  },
-  headers: {
-    Accept: 'application/json'
-  },
-  timeout: 5000
-})
+// const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
+//   query: {
+//     offset: offset.value,
+//     limit: limit
+//   },
+//   headers: {
+//     Accept: 'application/json'
+//   },
+//   timeout: 5000
+// })
+const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`)
 </script>
