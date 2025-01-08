@@ -1,7 +1,7 @@
 <template>
   <div class="my-4 flex items-center">
     <NuxtLink to="/categories" class="flex">
-      <span class="transition-all duration-300 hover:text-sky-500">
+      <span class="hover:text-sky-500">
         <Icon name="mingcute:home-2-line" size="24px" class="flex items-center" />
       </span>
       <span class="mx-1">/</span>
@@ -11,7 +11,7 @@
         :to="`/categories/${breadcrumb.slug}`"
         :class="{
           'cursor-default text-sky-500': isActiveBreadcrumb(breadcrumb.slug),
-          'transition-all duration-300 hover:text-sky-500': !isActiveBreadcrumb(breadcrumb.slug)
+          'hover:text-sky-500': !isActiveBreadcrumb(breadcrumb.slug)
         }"
       >
         {{ breadcrumb.name }}
