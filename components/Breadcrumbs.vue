@@ -1,12 +1,17 @@
 <template>
   <div class="my-4 flex items-center">
-    <NuxtLink to="/categories" class="mr-1"><span class="hover:underline">Home</span> /</NuxtLink>
+    <NuxtLink to="/categories" class="flex">
+      <span class="transition-all duration-300 hover:text-sky-500">
+        <Icon name="mingcute:home-2-line" size="24px" class="flex items-center" />
+      </span>
+      <span class="mx-1">/</span>
+    </NuxtLink>
     <div v-for="(breadcrumb, index) in breadcrumbs" :key="breadcrumb.id" class="flex items-center">
       <NuxtLink
         :to="`/categories/${breadcrumb.slug}`"
         :class="{
           'cursor-default text-sky-500': isActiveBreadcrumb(breadcrumb.slug),
-          'hover:underline': !isActiveBreadcrumb(breadcrumb.slug)
+          'transition-all duration-300 hover:text-sky-500': !isActiveBreadcrumb(breadcrumb.slug)
         }"
       >
         {{ breadcrumb.name }}

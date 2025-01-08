@@ -9,7 +9,7 @@ export default defineNuxtConfig({
       autoprefixer: {}
     }
   },
-  modules: [],
+  modules: ['@nuxt/icon'],
   app: {
     head: {
       title: 'Интернет-магазин Nuxt 3: официальный сайт онлайн-гипермаркета Nuxt 3 в Украине',

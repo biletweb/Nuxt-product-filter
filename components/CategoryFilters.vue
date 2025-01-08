@@ -1,10 +1,6 @@
 <template>
   <div class="rounded-lg border border-sky-300 bg-sky-200 p-4">
-    <div
-      v-for="(filter, index) in categoryFilters"
-      :key="filter.id"
-      :class="{ 'mb-2': index !== categoryFilters.length - 1 }"
-    >
+    <div v-for="(filter, index) in categoryFilters" :key="filter.id" :class="{ 'mb-2': index !== categoryFilters.length - 1 }">
       <span class="font-bold">{{ filter.name }}</span>
       <div v-for="value in filter.values" :key="value.id" class="flex items-center">
         <input type="checkbox" :value="value.id" :id="value.id" />
@@ -16,7 +12,7 @@
 
 <script setup>
 const props = defineProps({
-    categoryFilters: {
+  categoryFilters: {
     type: Array,
     required: true
   }
