@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-lg border border-slate-300 bg-slate-100 p-4">
+  <div class="rounded-lg border border-slate-300 bg-slate-100 p-4 h-full">
     <div class="mb-4 flex items-center justify-between">
       <span class="rounded-lg bg-rose-500 px-2 py-1 text-xs text-white">SALE</span>
       <Icon
