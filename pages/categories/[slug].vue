@@ -20,6 +20,16 @@
       </div>
       <div class="w-10/12">
         <ProductList :products="data.products" />
+        <div class="mt-4 text-center">
+          <button
+            v-if="hasMore"
+            type="button"
+            class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600 disabled:bg-slate-300"
+            :disabled="loadingHasMore"
+          >
+            Load more
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -29,6 +39,10 @@
 const config = useRuntimeConfig()
 const categorySlug = useRoute().params.slug
 const seoUrl = config.public.frontendUrl + useRoute().fullPath
+const offset = ref(0)
+const limit = 10
+const hasMore = ref(true)
+const loadingHasMore = ref(false)
 
 const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
   timeout: 5000
