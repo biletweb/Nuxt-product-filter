@@ -21,6 +21,7 @@
 <script setup>
 const config = useRuntimeConfig()
 
-// const { data, status } = await useFetch(config.public.backendUrl + `/categories`)
-const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories`)
+const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories`, {
+  timeout: 5000
+})
 </script>
