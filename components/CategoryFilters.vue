@@ -54,10 +54,10 @@ const submitFilters = () => {
       <div v-for="value in filter.values" :key="value.id" class="flex items-center">
         <input
           type="checkbox"
-          :value="value.id"
+          :value="value.value"
           :id="value.id"
-          :checked="isChecked(filter.id, value.id)"
-          @change="(handleFilterChange(filter.id, value.id), submitFilters())"
+          :checked="isChecked(filter.name, value.value)"
+          @change="(handleFilterChange(filter.name, value.value), submitFilters())"
         />
         <label :for="value.id" class="ms-1">{{ value.value }}</label>
       </div>
