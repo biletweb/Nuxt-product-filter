@@ -28,7 +28,8 @@
             class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600 disabled:bg-slate-300"
             :disabled="loadingHasMore"
           >
-            Load more
+            <Icon v-if="loadingHasMore" name="svg-spinners:8-dots-rotate" size="24px" class="flex items-center" />
+            <span v-else>Load more</span>
           </button>
         </div>
       </div>
@@ -41,7 +42,7 @@ const config = useRuntimeConfig()
 const categorySlug = useRoute().params.slug
 const seoUrl = config.public.frontendUrl + useRoute().fullPath
 const offset = ref(0)
-const limit = 10
+const limit = 1
 const hasMore = ref(true)
 const loadingHasMore = ref(false)
 
