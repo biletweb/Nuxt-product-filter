@@ -12,7 +12,9 @@
   <div v-else-if="data">
     <div class="my-4 text-3xl font-bold">{{ data.categoryName }}</div>
     <Breadcrumbs :breadcrumbs="data.breadcrumbs" />
-    <div v-if="status === 'pending'" class="text-center">Loading...</div>
+    <div v-if="status === 'pending'" class="flex justify-center">
+      <Icon name="svg-spinners:8-dots-rotate" size="36px" class="text-sky-500" />
+    </div>
     <CategoryList v-else-if="data.categories.length" :categories="data.categories" />
     <div v-if="status !== 'pending' && data.categoryFilters.length" class="my-4 flex gap-4">
       <div class="w-2/12">
