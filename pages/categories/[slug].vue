@@ -23,6 +23,7 @@
         <div class="mt-4 text-center">
           <button
             v-if="hasMore"
+            @click="loadMore"
             type="button"
             class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600 disabled:bg-slate-300"
             :disabled="loadingHasMore"
@@ -47,4 +48,20 @@ const loadingHasMore = ref(false)
 const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
   timeout: 5000
 })
+
+const loadMore = async () => {
+  loadingHasMore.value = true
+  offset.value += limit
+  const response = await $fetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
+    params: {
+      offset: offset.value,
+      limit: limit
+    },
+    timeout: 5000
+  })
+  data.value.products = [...data.value.products, ...response.products]
+  console.log(response.products)
+  hasMore.value = response.products.length >= limit
+  loadingHasMore.value = false
+}
 </script>
