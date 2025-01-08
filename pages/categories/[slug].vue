@@ -54,7 +54,15 @@ const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/
 })
 
 if (data.value) {
-  hasMore.value = data.value.products.length >= limit
+  watch(
+    data,
+    () => {
+      hasMore.value = data.value.products.length >= limit
+    },
+    {
+      immediate: true
+    }
+  )
 }
 
 const loadMore = async () => {
