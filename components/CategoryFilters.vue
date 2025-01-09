@@ -32,24 +32,25 @@ const router = useRouter()
 const selectedFilters = reactive({ ...parseFiltersFromQuery(route.query) })
 
 const handleFilterChange = (name, value) => {
-  if (!selectedFilters[name]) {
-    selectedFilters[name] = []
-  }
+  selectedFilters[name] = selectedFilters[name] || []
   const filter = selectedFilters[name]
+
   if (filter.includes(value)) {
-    const index = filter.indexOf(value)
-    filter.splice(index, 1)
-    if (filter.length === 0) {
+    selectedFilters[name] = filter.filter((val) => val !== value)
+    if (selectedFilters[name].length === 0) {
       delete selectedFilters[name]
     }
   } else {
-    filter.push(value)
+    selectedFilters[name] = [...filter, value]
   }
 }
 
 const submitFilters = () => {
   const query = buildQueryFromFilters(selectedFilters)
-  router.push({ query })
+  const currentQuery = route.query
+  if (JSON.stringify(currentQuery) !== JSON.stringify(query)) {
+    router.push({ query })
+  }
   emit('filterChange', selectedFilters)
 }
 
