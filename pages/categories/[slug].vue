@@ -17,7 +17,7 @@
     <CategoryList v-else-if="data.categories.length" :categories="data.categories" />
     <div v-if="status !== 'pending' && data.categoryFilters.length" class="my-4 flex gap-4">
       <div class="w-2/12">
-        <CategoryFilters :category-filters="data.categoryFilters" @filterChange="filterChange($event)" />
+        <CategoryFilters :category-filters="data.categoryFilters" @filterChange="updateFilters($event)" />
       </div>
       <div class="w-10/12">
         <div v-if="loadingChangeFilters" class="flex justify-center">
@@ -98,6 +98,15 @@ const loadMore = async () => {
   } finally {
     loadingHasMore.value = false
   }
+}
+
+let timeout
+
+const updateFilters = (filters) => {
+  clearTimeout(timeout)
+  timeout = setTimeout(() => {
+    filterChange(filters)
+  }, 800)
 }
 
 const filterChange = async (filters) => {
