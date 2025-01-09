@@ -2,6 +2,7 @@
   <Head>
     <Title>Categories - NUXT 3</Title>
   </Head>
+
   <div class="my-4 text-3xl font-bold">Categories</div>
   <div v-if="status === 'pending'" class="flex justify-center">
     <Icon name="svg-spinners:8-dots-rotate" size="36px" class="text-sky-500" />
