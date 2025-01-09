@@ -8,8 +8,7 @@
     <Meta property="og:url" :content="seoUrl" />
   </Head>
 
-  <ErrorMessage v-if="error" :error="error.statusCode" />
-  <div v-else-if="data">
+  <div v-if="data">
     <div class="my-4 text-3xl font-bold">{{ data.categoryName }}</div>
     <Breadcrumbs :breadcrumbs="data.breadcrumbs" />
     <div v-if="status === 'pending'" class="flex justify-center">
@@ -59,6 +58,14 @@ const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/
   timeout: 5000
 })
 
+if (error.value) {
+  throw createError({
+    statusCode: error.value.statusCode,
+    statusMessage: error.value.statusMessage || 'Request aborted due to timeout',
+    fatal: true
+  })
+}
+
 watch(
   data,
   () => {
@@ -82,10 +89,12 @@ const loadMore = async () => {
     })
     data.value.products = [...data.value.products, ...response.products]
     hasMore.value = response.products.length >= limit
-  } catch (err) {
-    error.value = {
-      statusCode: err.statusCode || 500
-    }
+  } catch (error) {
+    throw createError({
+      statusCode: error.statusCode,
+      statusMessage: error.response?._data?.name || error.statusMessage || 'Request aborted due to timeout',
+      fatal: true
+    })
   } finally {
     loadingHasMore.value = false
   }
@@ -110,10 +119,12 @@ const filterChange = async (filters) => {
     if (!response.products.length) {
       router.push('/categories')
     }
-  } catch (err) {
-    error.value = {
-      statusCode: err.statusCode || 500
-    }
+  } catch (error) {
+    throw createError({
+      statusCode: error.statusCode,
+      statusMessage: error.response?._data?.name || error.statusMessage || 'Request aborted due to timeout',
+      fatal: true
+    })
   } finally {
     loadingChangeFilters.value = false
   }
