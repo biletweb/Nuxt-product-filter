@@ -31,7 +31,12 @@ const router = useRouter()
 const parseFiltersFromQuery = (query) =>
   Object.fromEntries(Object.entries(query).map(([key, value]) => [key, Array.isArray(value) ? value : [value]]))
 
-const buildQueryFromFilters = (filters) => Object.fromEntries(Object.entries(filters).filter(([, values]) => values.length > 0))
+const buildQueryFromFilters = (filters) =>
+  Object.fromEntries(
+    Object.entries(filters)
+      .filter(([, values]) => values.length > 0)
+      .map(([key, values]) => [key, values.length === 1 ? values[0] : values])
+  )
 
 const selectedFilters = useState('selectedFilters', () => parseFiltersFromQuery(route.query))
 
