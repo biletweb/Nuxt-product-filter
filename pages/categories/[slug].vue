@@ -50,6 +50,7 @@ const limit = 10
 const hasMore = ref(true)
 const loadingHasMore = ref(false)
 const loadingChangeFilters = ref(false)
+const router = useRouter()
 
 const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/categories/${categorySlug}/subcategories`, {
   query: {
@@ -108,6 +109,9 @@ const filterChange = async (filters) => {
     })
     data.value.products = response.products
     hasMore.value = response.products.length >= limit
+    if (!response.products.length) {
+      router.push('/categories')
+    }
   } catch (err) {
     error.value = {
       statusCode: 500,
