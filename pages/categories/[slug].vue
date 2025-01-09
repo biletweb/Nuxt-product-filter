@@ -84,7 +84,7 @@ const loadMore = async () => {
     hasMore.value = response.products.length >= limit
   } catch (err) {
     error.value = {
-      statusCode: err.statusCode || 500,
+      statusCode: err.statusCode || 500
     }
   } finally {
     loadingHasMore.value = false
@@ -112,7 +112,7 @@ const filterChange = async (filters) => {
     }
   } catch (err) {
     error.value = {
-      statusCode: err.statusCode || 500,
+      statusCode: err.statusCode || 500
     }
   } finally {
     loadingChangeFilters.value = false
