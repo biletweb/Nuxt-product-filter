@@ -31,19 +31,19 @@ const route = useRoute()
 const router = useRouter()
 const selectedFilters = reactive({ ...parseFiltersFromQuery(route.query) })
 
-const handleFilterChange = (filterId, valueId) => {
-  if (!selectedFilters[filterId]) {
-    selectedFilters[filterId] = []
+const handleFilterChange = (name, value) => {
+  if (!selectedFilters[name]) {
+    selectedFilters[name] = []
   }
-  const filter = selectedFilters[filterId]
-  if (filter.includes(valueId)) {
-    const index = filter.indexOf(valueId)
+  const filter = selectedFilters[name]
+  if (filter.includes(value)) {
+    const index = filter.indexOf(value)
     filter.splice(index, 1)
     if (filter.length === 0) {
-      delete selectedFilters[filterId]
+      delete selectedFilters[name]
     }
   } else {
-    filter.push(valueId)
+    filter.push(value)
   }
 }
 
@@ -53,22 +53,22 @@ const submitFilters = () => {
   emit('filterChange', selectedFilters)
 }
 
-const isChecked = (filterId, valueId) => {
-  return selectedFilters[filterId]?.includes(valueId) || false
+const isChecked = (name, value) => {
+  return selectedFilters[name]?.includes(value) || false
 }
 
 function parseFiltersFromQuery(query) {
   const filters = {}
-  for (const [key, value] of Object.entries(query)) {
-    filters[key] = Array.isArray(value) ? value : [value]
+  for (const [name, value] of Object.entries(query)) {
+    filters[name] = Array.isArray(value) ? value : [value]
   }
   return filters
 }
 
 function buildQueryFromFilters(filters) {
   const query = {}
-  for (const [key, values] of Object.entries(filters)) {
-    query[key] = values
+  for (const [name, values] of Object.entries(filters)) {
+    query[name] = values
   }
   return query
 }
