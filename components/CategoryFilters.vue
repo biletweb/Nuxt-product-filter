@@ -5,10 +5,10 @@
       <div v-for="value in filter.values" :key="value.id" class="flex items-center">
         <input
           type="checkbox"
-          :value="value.value"
           :id="value.id"
+          :value="value.value"
           :checked="isChecked(filter.name, value.value)"
-          @change="(handleFilterChange(filter.name, value.value), submitFilters())"
+          @change="handleFilterChange(filter.name, value.value)"
         />
         <label :for="value.id" class="ms-1">{{ value.value }}</label>
       </div>
@@ -17,8 +17,6 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router'
-
 const props = defineProps({
   categoryFilters: {
     type: Array,
@@ -29,54 +27,61 @@ const props = defineProps({
 const emit = defineEmits(['filterChange'])
 const route = useRoute()
 const router = useRouter()
-const selectedFilters = reactive({ ...parseFiltersFromQuery(route.query) })
+
+const parseFiltersFromQuery = (query) =>
+  Object.fromEntries(Object.entries(query).map(([key, value]) => [key, Array.isArray(value) ? value : [value]]))
+
+const buildQueryFromFilters = (filters) => Object.fromEntries(Object.entries(filters).filter(([, values]) => values.length > 0))
+
+const selectedFilters = useState('selectedFilters', () => parseFiltersFromQuery(route.query))
 
 const handleFilterChange = (name, value) => {
-  selectedFilters[name] = selectedFilters[name] || []
-  const filter = selectedFilters[name]
-
-  if (filter.includes(value)) {
-    selectedFilters[name] = filter.filter((val) => val !== value)
-    if (selectedFilters[name].length === 0) {
-      delete selectedFilters[name]
+  const filters = { ...selectedFilters.value }
+  if (!filters[name]) {
+    filters[name] = []
+  }
+  const index = filters[name].indexOf(value)
+  if (index > -1) {
+    filters[name].splice(index, 1)
+    if (filters[name].length === 0) {
+      delete filters[name]
     }
   } else {
-    selectedFilters[name] = [...filter, value]
+    filters[name].push(value)
   }
-}
-
-const submitFilters = () => {
-  const query = buildQueryFromFilters(selectedFilters)
-  const currentQuery = route.query
-  if (JSON.stringify(currentQuery) !== JSON.stringify(query)) {
-    router.push({ query })
-  }
-  emit('filterChange', selectedFilters)
+  selectedFilters.value = filters
 }
 
 const isChecked = (name, value) => {
-  return selectedFilters[name]?.includes(value) || false
+  return selectedFilters.value[name]?.includes(value) || false
 }
 
-function parseFiltersFromQuery(query) {
-  const filters = {}
-  for (const [name, value] of Object.entries(query)) {
-    filters[name] = Array.isArray(value) ? value : [value]
-  }
-  return filters
-}
+watch(
+  selectedFilters,
+  (newFilters) => {
+    const query = buildQueryFromFilters(newFilters)
+    if (JSON.stringify(route.query) !== JSON.stringify(query)) {
+      router.push({ query })
+    }
+    emit('filterChange', newFilters)
+  },
+  { deep: true }
+)
 
-function buildQueryFromFilters(filters) {
-  const query = {}
-  for (const [name, values] of Object.entries(filters)) {
-    query[name] = values
+watch(
+  () => route.fullPath,
+  () => {
+    selectedFilters.value = parseFiltersFromQuery(route.query)
   }
-  return query
-}
+)
 
 onMounted(() => {
   if (Object.keys(route.query).length > 0) {
-    emit('filterChange', selectedFilters)
+    emit('filterChange', selectedFilters.value)
   }
+})
+
+onUnmounted(() => {
+  selectedFilters.value = {}
 })
 </script>
