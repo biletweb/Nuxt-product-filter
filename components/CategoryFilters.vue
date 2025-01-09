@@ -114,7 +114,7 @@ const isChecked = (filterId, valueId) => {
 function parseFiltersFromQuery(query) {
   const filters = {}
   for (const [key, value] of Object.entries(query)) {
-    filters[key] = Array.isArray(value) ? value.map(Number) : [Number(value)]
+    filters[key] = Array.isArray(value) ? value : [value]
   }
   return filters
 }
