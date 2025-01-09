@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center h-screen">
+  <div class="flex h-screen items-center justify-center">
     <div class="mx-auto w-6/12 rounded-lg border bg-slate-100 p-4 text-center">
       <p class="mt-7 text-7xl font-bold">{{ error.statusCode }}</p>
       <p class="mt-7 text-6xl">Ooops.</p>
