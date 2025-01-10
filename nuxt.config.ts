@@ -9,7 +9,11 @@ export default defineNuxtConfig({
       autoprefixer: {}
     }
   },
-  modules: ['@nuxt/icon', '@nuxt/image'],
+  modules: ['@nuxt/icon', '@nuxt/image', '@nuxtjs/color-mode'],
+  colorMode: {
+    classSuffix: '',
+    storageKey: 'color-mode'
+  },
   app: {
     head: {
       title: 'Интернет-магазин Nuxt 3: официальный сайт онлайн-гипермаркета Nuxt 3 в Украине',
