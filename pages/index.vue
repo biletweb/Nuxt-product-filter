@@ -28,7 +28,7 @@
             type="button"
             class="flex w-full cursor-pointer items-center rounded-lg px-4 py-2 text-sm hover:bg-slate-50"
           >
-            <Icon @click="toggleUserRoleFilter" name="mingcute:computer-line" size="24px" class="me-1" />
+            <Icon name="mingcute:computer-line" size="24px" class="me-1" />
             <span>System</span>
           </button>
           <button
@@ -36,7 +36,7 @@
             type="button"
             class="flex w-full cursor-pointer items-center rounded-lg px-4 py-2 text-sm hover:bg-slate-50"
           >
-            <Icon @click="toggleUserRoleFilter" name="mingcute:sun-line" size="24px" class="me-1" />
+            <Icon name="mingcute:sun-line" size="24px" class="me-1" />
             <span>Light</span>
           </button>
           <button
@@ -44,7 +44,7 @@
             type="button"
             class="flex w-full cursor-pointer items-center rounded-lg px-4 py-2 text-sm hover:bg-slate-50"
           >
-            <Icon @click="toggleUserRoleFilter" name="mingcute:moon-line" size="24px" class="me-1" />
+            <Icon name="mingcute:moon-line" size="24px" class="me-1" />
             <span>Dark</span>
           </button>
         </div>
