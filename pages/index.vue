@@ -9,5 +9,55 @@
         <option value="dark">Dark</option>
       </select>
     </div>
+
+    <div class="relative">
+      <div>
+        <client-only>
+          <Icon
+            @click="toggleUserRoleFilter"
+            :name="colorMode.value === 'light' ? 'mingcute:sun-line' : 'mingcute:moon-line'"
+            size="24px"
+            class="cursor-pointer"
+          />
+        </client-only>
+      </div>
+      <div v-if="showUserRoleFilter" class="absolute start-4 top-6 z-10 mt-2 rounded-lg border border-slate-300 bg-slate-100">
+        <div class="p-2">
+          <button
+            @click=""
+            type="button"
+            class="flex w-full cursor-pointer items-center rounded-lg px-4 py-2 text-sm hover:bg-slate-50"
+          >
+            <Icon @click="toggleUserRoleFilter" name="mingcute:computer-line" size="24px" class="me-1" />
+            <span>System</span>
+          </button>
+          <button
+            @click=""
+            type="button"
+            class="flex w-full cursor-pointer items-center rounded-lg px-4 py-2 text-sm hover:bg-slate-50"
+          >
+            <Icon @click="toggleUserRoleFilter" name="mingcute:sun-line" size="24px" class="me-1" />
+            <span>Light</span>
+          </button>
+          <button
+            @click=""
+            type="button"
+            class="flex w-full cursor-pointer items-center rounded-lg px-4 py-2 text-sm hover:bg-slate-50"
+          >
+            <Icon @click="toggleUserRoleFilter" name="mingcute:moon-line" size="24px" class="me-1" />
+            <span>Dark</span>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
+<script setup>
+const showUserRoleFilter = ref(false)
+const colorMode = useColorMode()
+
+const toggleUserRoleFilter = () => {
+  showUserRoleFilter.value = !showUserRoleFilter.value
+}
+</script>
