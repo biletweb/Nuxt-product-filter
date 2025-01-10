@@ -12,7 +12,7 @@
           @change="handleFilterChange(filter.name, value.value)"
         />
         <span v-if="isChecked(filter.name, value.value)" class="pointer-events-none absolute ms-[2px] text-white">
-          <Icon name="mingcute:check-fill" size="12px" />
+          <Icon name="mingcute:check-2-fill" size="12px" />
         </span>
         <label :for="value.id" class="ms-1">{{ value.value }}</label>
       </div>
