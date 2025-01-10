@@ -11,6 +11,5 @@ export default {
   theme: {
     extend: {}
   },
-  plugins: [],
-  darkMode: 'class'
+  plugins: []
 }
