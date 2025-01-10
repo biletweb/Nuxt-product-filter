@@ -2,14 +2,18 @@
   <div class="rounded-lg border border-slate-300 bg-slate-100 p-4">
     <div v-for="(filter, index) in categoryFilters" :key="filter.id" :class="{ 'mb-2': index !== categoryFilters.length - 1 }">
       <span class="font-bold">{{ filter.name }}</span>
-      <div v-for="value in filter.values" :key="value.id" class="flex items-center">
+      <div v-for="value in filter.values" :key="value.id" class="relative flex items-center">
         <input
           type="checkbox"
           :id="value.id"
           :value="value.value"
           :checked="isChecked(filter.name, value.value)"
+          class="h-4 w-4 cursor-pointer appearance-none rounded border border-sky-500 bg-white checked:bg-sky-500"
           @change="handleFilterChange(filter.name, value.value)"
         />
+        <span v-if="isChecked(filter.name, value.value)" class="pointer-events-none absolute ms-[2px] text-white">
+          <Icon name="mingcute:check-fill" size="12px" />
+        </span>
         <label :for="value.id" class="ms-1">{{ value.value }}</label>
       </div>
     </div>
