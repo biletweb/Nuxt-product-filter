@@ -10,7 +10,7 @@
       />
     </div>
     <div class="mb-4">
-      <NuxtImg src="/tv2.webp" width="210" height="120" />
+      <NuxtImg :src="`https://picsum.photos/800/600?random=` + product.id" width="210" height="120" />
     </div>
     <div class="mb-4 flex-grow">
       <span class="hover:cursor-pointer hover:text-sky-500">{{ product.name }}</span>
