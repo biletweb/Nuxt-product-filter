@@ -10,7 +10,17 @@
       />
     </div>
     <div class="mb-4">
-      <NuxtImg :src="`https://picsum.photos/800/600?random=` + product.id" width="210" height="120" />
+      <NuxtImg
+        :src="`https://picsum.photos/1024/768?random=` + product.id"
+        width="210"
+        height="120"
+        :custom="true"
+        v-slot="{ src, isLoaded, imgAttrs }"
+        class="rounded-lg"
+      >
+        <img v-if="isLoaded" v-bind="imgAttrs" :src="src" />
+        <div v-else class="h-[118px] w-full animate-pulse rounded-lg bg-slate-300"></div>
+      </NuxtImg>
     </div>
     <div class="mb-4 flex-grow">
       <span class="hover:cursor-pointer hover:text-sky-500">{{ product.name }}</span>
