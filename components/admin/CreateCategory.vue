@@ -20,10 +20,17 @@
       />
       <p class="text-xs text-red-500">Ошибка</p>
     </div>
+    <div class="flex justify-end">
+      <button type="submit" class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600" :disabled="loading">
+        <Spinner v-if="loading" class="w-6" />
+        <span v-else>Create</span>
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup>
 const errorField = ref(null)
 const name = ref('')
+const loading = ref(false)
 </script>
