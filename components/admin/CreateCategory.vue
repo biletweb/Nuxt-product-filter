@@ -3,7 +3,7 @@
     <div class="text-xl font-bold">Create category</div>
     <form @submit.prevent="createCategory">
       <div class="grid grid-cols-2 gap-4">
-        <div class="relative my-4">
+        <div class="relative">
           <label for="name" class="text-sm">Name<sup class="text-red-500">*</sup></label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
             <Icon name="mingcute:folder-open-line" size="24px" />
@@ -23,7 +23,7 @@
           <p class="text-xs text-red-500">{{ errorResponse }}</p>
         </div>
 
-        <div class="relative my-4">
+        <div class="relative">
           <label for="name" class="text-sm">Slug</label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
             <Icon name="mingcute:folder-open-line" size="24px" />
@@ -42,8 +42,27 @@
           />
           <p class="text-xs text-red-500">{{ errorResponse }}</p>
         </div>
+
+        <div class="relative col-span-2">
+          <label for="description" class="text-sm">Description SEO<sup class="text-red-500">*</sup></label>
+          <div class="absolute left-2.5 top-[33px] text-gray-400">
+            <Icon name="mingcute:information-line" size="24px" />
+          </div>
+          <textarea
+            v-model="data.category.description"
+            name="description"
+            id="description"
+            placeholder="Description"
+            class="w-full rounded-lg border p-2 pl-10 focus:outline-none"
+            :class="{
+              'focus:border-sky-500': errorField !== 'description',
+              'border-red-500': errorField === 'description'
+            }"
+          />
+          <p class="text-xs text-red-500">{{ errorResponse }}</p>
+        </div>
       </div>
-      <div class="flex justify-end">
+      <div class="mt-4 flex justify-end">
         <button type="submit" class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600" :disabled="loading">
           <Icon v-if="loading" name="svg-spinners:8-dots-rotate" size="24px" class="flex" />
           <span v-else>Create</span>
@@ -83,7 +102,8 @@ const createCategory = async () => {
       method: 'POST',
       body: {
         name: data.category.name,
-        slug: data.category.slug
+        slug: data.category.slug,
+        description: data.category.description
       },
       timeout: 5000
     })
@@ -93,6 +113,7 @@ const createCategory = async () => {
       successResponse.value = response.message || 'Категория успешно создана.'
       data.category.name = ''
       data.category.slug = ''
+      data.category.description = ''
     }
   } catch (error) {
     throw createError({
