@@ -14,7 +14,7 @@
               <NuxtLink to="/categories" class="text-sky-500 hover:text-sky-600">Categories</NuxtLink>
             </li>
             <li>
-              <!-- <NuxtLink to="/admin" class="text-sky-500 hover:text-sky-600" active-class="text-red-500">Categories</NuxtLink> -->
+              <!-- <NuxtLink to="/admin" class="text-sky-500 hover:text-sky-600" active-class="text-red-500">Admin</NuxtLink> -->
               <NuxtLink to="/admin" class="text-sky-500 hover:text-sky-600">Admin</NuxtLink>
             </li>
           </ul>
