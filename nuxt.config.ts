@@ -9,7 +9,7 @@ export default defineNuxtConfig({
       autoprefixer: {}
     }
   },
-  modules: ['@nuxt/icon', '@nuxt/image'],
+  modules: ['@nuxt/icon', '@nuxt/image', '@nuxtjs/i18n'],
   app: {
     head: {
       title: 'Интернет-магазин Nuxt 3: официальный сайт онлайн-гипермаркета Nuxt 3 в Украине',
@@ -34,5 +34,21 @@ export default defineNuxtConfig({
   },
   image: {
     domains: ['https://picsum.photos']
+  },
+  i18n: {
+    locales: [
+      {
+        code: 'en',
+        file: 'en.json',
+        name: 'English'
+      },
+      {
+        code: 'ru',
+        file: 'ru.json',
+        name: 'Russian'
+      }
+    ],
+    strategy: 'prefix_except_default',
+    defaultLocale: 'ru'
   }
 })

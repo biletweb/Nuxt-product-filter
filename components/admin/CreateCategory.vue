@@ -1,7 +1,7 @@
 <template>
   <div class="rounded-lg border border-slate-300 bg-slate-100 p-4">
     <div class="flex items-center justify-between">
-      <div class="text-xl font-bold">Create category</div>
+      <div class="text-xl font-bold">{{ $t('Create category') }}</div>
       <div v-if="successResponse" class="rounded-lg border border-green-100 bg-green-50 p-1 text-xs text-green-500">
         {{ successResponse }}
       </div>
@@ -9,7 +9,7 @@
     <form @submit.prevent="createCategory">
       <div class="grid grid-cols-2 gap-4">
         <div class="relative">
-          <label for="name" class="ms-1 text-sm">Name<sup class="text-red-500">*</sup></label>
+          <label for="name" class="ms-1 text-sm">{{ $t('Name') }}<sup class="text-red-500">*</sup></label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
             <Icon name="mingcute:folder-open-line" size="24px" />
           </div>
@@ -18,7 +18,7 @@
             type="text"
             name="name"
             id="name"
-            placeholder="Name"
+            :placeholder="$t('Name')"
             class="w-full rounded-lg border p-2 pl-10 focus:outline-none"
             :class="{
               'focus:border-sky-500': errorField !== 'name',
@@ -28,7 +28,7 @@
           <p v-if="errorField === 'name'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
         </div>
         <div class="relative">
-          <label for="name" class="ms-1 text-sm">Slug</label>
+          <label for="name" class="ms-1 text-sm">{{ $t('Slug') }}</label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
             <Icon name="mingcute:copy-3-line" size="24px" />
           </div>
@@ -37,7 +37,7 @@
             type="text"
             name="slug"
             id="slug"
-            placeholder="Slug"
+            :placeholder="$t('Slug')"
             class="w-full rounded-lg border p-2 pl-10 focus:outline-none"
             :class="{
               'focus:border-sky-500': errorField !== 'slug',
@@ -47,7 +47,7 @@
           <p v-if="errorField === 'slug'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
         </div>
         <div class="relative col-span-2">
-          <label for="description" class="ms-1 text-sm">Description SEO<sup class="text-red-500">*</sup></label>
+          <label for="description" class="ms-1 text-sm">{{ $t('Description SEO') }}<sup class="text-red-500">*</sup></label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
             <Icon name="mingcute:information-line" size="24px" />
           </div>
@@ -55,7 +55,7 @@
             v-model="data.category.description"
             name="description"
             id="description"
-            placeholder="Description"
+            :placeholder="$t('Description SEO')"
             class="min-h-[42px] w-full rounded-lg border p-2 pl-10 focus:outline-none"
             :class="{
               'focus:border-sky-500': errorField !== 'description',
@@ -69,7 +69,7 @@
       <div class="mt-4 flex justify-end">
         <button type="submit" class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600" :disabled="loading">
           <Icon v-if="loading" name="svg-spinners:8-dots-rotate" size="24px" class="flex" />
-          <span v-else>Create</span>
+          <span v-else>{{ $t('Create') }}</span>
         </button>
       </div>
     </form>

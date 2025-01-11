@@ -7,15 +7,15 @@
           <ul class="flex items-center gap-4">
             <li>
               <!-- <NuxtLink to="/" class="text-sky-500 hover:text-sky-600" active-class="text-red-500">Home</NuxtLink> -->
-              <NuxtLink to="/" class="text-sky-500 hover:text-sky-600">Home</NuxtLink>
+              <NuxtLinkLocale to="/" class="text-sky-500 hover:text-sky-600">Home</NuxtLinkLocale>
             </li>
             <li>
               <!-- <NuxtLink to="/categories" class="text-sky-500 hover:text-sky-600" active-class="text-red-500">Categories</NuxtLink> -->
-              <NuxtLink to="/categories" class="text-sky-500 hover:text-sky-600">Categories</NuxtLink>
+              <NuxtLinkLocale to="/categories" class="text-sky-500 hover:text-sky-600">Categories</NuxtLinkLocale>
             </li>
             <li>
               <!-- <NuxtLink to="/admin" class="text-sky-500 hover:text-sky-600" active-class="text-red-500">Admin</NuxtLink> -->
-              <NuxtLink to="/admin" class="text-sky-500 hover:text-sky-600">Admin</NuxtLink>
+              <NuxtLinkLocale to="/admin" class="text-sky-500 hover:text-sky-600">Admin</NuxtLinkLocale>
             </li>
           </ul>
         </nav>

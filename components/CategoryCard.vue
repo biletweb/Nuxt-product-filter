@@ -1,9 +1,9 @@
 <template>
-  <NuxtLink :to="`/categories/${category.slug}`">
+  <NuxtLinkLocale :to="`/categories/${category.slug}`">
     <div class="rounded-lg bg-slate-300 p-4 text-center">
       {{ category.name }}
     </div>
-  </NuxtLink>
+  </NuxtLinkLocale>
 </template>
 
 <script setup>
