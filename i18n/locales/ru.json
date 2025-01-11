@@ -3,5 +3,7 @@
   "Name": "Название",
   "Slug": "URL-ярлык",
   "Description SEO": "Описание SEO",
-  "Create": "Создать"
+  "Create": "Создать",
+  "English": "Английский",
+  "Russian": "Русский"
 }

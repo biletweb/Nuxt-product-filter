@@ -48,7 +48,7 @@ export default defineNuxtConfig({
         name: 'Russian'
       }
     ],
-    strategy: 'prefix_except_default',
+    strategy: 'prefix',
     defaultLocale: 'ru'
   }
 })
