@@ -22,7 +22,7 @@
     </div>
     <div class="flex justify-end">
       <button type="submit" class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600" :disabled="loading">
-        <Spinner v-if="loading" class="w-6" />
+        <Icon v-if="!loading" name="svg-spinners:8-dots-rotate" size="24px" class="flex" />
         <span v-else>Create</span>
       </button>
     </div>
