@@ -11,7 +11,7 @@
     </div>
     <div class="mb-4">
       <NuxtImg
-        :src="`https://picsum.photos/1024/768?random=` + product.id"
+        :src="`https://picsum.photos/800/600?random=` + product.id"
         width="210"
         height="120"
         :custom="true"
