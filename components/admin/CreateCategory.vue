@@ -9,7 +9,7 @@
     <form @submit.prevent="createCategory">
       <div class="grid grid-cols-2 gap-4">
         <div class="relative">
-          <label for="name" class="text-sm">Name<sup class="text-red-500">*</sup></label>
+          <label for="name" class="ms-1 text-sm">Name<sup class="text-red-500">*</sup></label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
             <Icon name="mingcute:folder-open-line" size="24px" />
           </div>
@@ -28,7 +28,7 @@
           <p v-if="errorField === 'name'" class="mt-1 text-xs text-red-500">{{ errorResponse }}</p>
         </div>
         <div class="relative">
-          <label for="name" class="text-sm">Slug</label>
+          <label for="name" class="ms-1 text-sm">Slug</label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
             <Icon name="mingcute:copy-3-line" size="24px" />
           </div>
@@ -47,7 +47,7 @@
           <p v-if="errorField === 'slug'" class="mt-1 text-xs text-red-500">{{ errorResponse }}</p>
         </div>
         <div class="relative col-span-2">
-          <label for="description" class="text-sm">Description SEO<sup class="text-red-500">*</sup></label>
+          <label for="description" class="ms-1 text-sm">Description SEO<sup class="text-red-500">*</sup></label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
             <Icon name="mingcute:information-line" size="24px" />
           </div>
