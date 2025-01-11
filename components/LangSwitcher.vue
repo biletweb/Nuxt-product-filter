@@ -1,16 +1,20 @@
 <template>
-  <!-- <SwitchLocalePathLink locale="en">English</SwitchLocalePathLink>
-  <SwitchLocalePathLink locale="ru">Russian</SwitchLocalePathLink> -->
-  <NuxtLink v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
-    {{ $t(locale.name) }}
-  </NuxtLink>
+  <button type="button" @click="toggleLocale">
+    {{ currentLocaleName }}
+  </button>
 </template>
 
 <script setup>
-const { locale, locales } = useI18n()
-const switchLocalePath = useSwitchLocalePath()
+const { locale, locales, setLocale } = useI18n()
 
-const availableLocales = computed(() => {
-  return locales.value.filter((i) => i.code !== locale.value)
+const currentLocaleName = computed(() => {
+  const current = locales.value.find((l) => l.code === locale.value)
+  return current ? current.name : locale.value
 })
+
+const toggleLocale = () => {
+  const currentIndex = locales.value.findIndex((l) => l.code === locale.value)
+  const nextIndex = (currentIndex + 1) % locales.value.length
+  setLocale(locales.value[nextIndex].code)
+}
 </script>

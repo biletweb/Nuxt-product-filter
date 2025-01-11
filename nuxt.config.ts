@@ -40,12 +40,17 @@ export default defineNuxtConfig({
       {
         code: 'en',
         file: 'en.json',
-        name: 'English'
+        name: 'EN'
       },
       {
         code: 'ru',
         file: 'ru.json',
-        name: 'Russian'
+        name: 'RU'
+      },
+      {
+        code: 'uk',
+        file: 'uk.json',
+        name: 'UK'
       }
     ],
     strategy: 'prefix',

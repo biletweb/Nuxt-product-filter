@@ -6,7 +6,9 @@
         <nav>
           <ul class="flex items-center gap-4">
             <li>
-              <LangSwitcher />
+              <div class="text-sky-500 hover:text-sky-600">
+                <LangSwitcher />
+              </div>
             </li>
             <li>
               <!-- <NuxtLink to="/" class="text-sky-500 hover:text-sky-600" active-class="text-red-500">Home</NuxtLink> -->
