@@ -77,7 +77,6 @@
 </template>
 
 <script setup>
-const errorField = ref(null)
 const data = reactive({
   category: {
     name: '',
@@ -85,10 +84,11 @@ const data = reactive({
     description: ''
   }
 })
-const loading = ref(false)
 const config = useRuntimeConfig()
+const loading = ref(false)
 const successResponse = ref(null)
 const errorResponse = ref(null)
+const errorField = ref(null)
 
 const createCategory = async () => {
   loading.value = true
@@ -109,7 +109,7 @@ const createCategory = async () => {
       errorResponse.value = response.error
       errorField.value = response.field
     } else {
-      successResponse.value = response.message || 'Категория успешно создана.'
+      successResponse.value = response.message
       data.category.name = ''
       data.category.slug = ''
       data.category.description = ''
