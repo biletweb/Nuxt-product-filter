@@ -133,10 +133,6 @@ const successResponse = ref(null)
 const errorResponse = ref(null)
 
 const createCategory = async () => {
-  // if (!data.category.name) {
-  //   errorResponse.value = 'Название категории не может быть пустым.'
-  //   return
-  // }
   loading.value = true
   errorField.value = null
   errorResponse.value = null
