@@ -1,6 +1,7 @@
 <template>
-  <button type="button" @click="toggleLocale">
-    {{ currentLocaleName }}
+  <button type="button" @click="toggleLocale" class="flex items-center gap-1">
+    <Icon name="mingcute:location-line" size="24px" />
+    <span>{{ currentLocaleName }}</span>
   </button>
 </template>
 
