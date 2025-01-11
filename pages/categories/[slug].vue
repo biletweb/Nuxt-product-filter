@@ -2,7 +2,6 @@
   <Head v-if="data">
     <Title>{{ data.categoryName }} - NUXT 3</Title>
     <Meta name="description" :content="data.description" />
-    <Meta name="keywords" :content="data.keywords" />
     <Meta property="og:title" :content="data.categoryName" />
     <Meta property="og:description" :content="data.ogDescription" />
     <Meta property="og:url" :content="seoUrl" />
