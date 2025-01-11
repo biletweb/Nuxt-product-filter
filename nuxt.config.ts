@@ -21,6 +21,7 @@ export default defineNuxtConfig({
         },
         { name: 'keywords', content: 'NUXT 3, НУКСТ 3, онлайн-гипермаркет' },
         { name: 'property', content: 'website' },
+        { name: 'og:type', content: 'website' },
         { name: 'og:url', content: 'http://localhost:3000' },
         { name: 'og:image', content: 'http://localhost:3000/favicon.ico' }
       ],
