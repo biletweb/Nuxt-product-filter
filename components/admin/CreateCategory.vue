@@ -61,6 +61,45 @@
           />
           <p class="text-xs text-red-500">{{ errorResponse }}</p>
         </div>
+
+        <div class="relative col-span-2">
+          <label for="name" class="text-sm">Keywords SEO<sup class="text-red-500">*</sup></label>
+          <div class="absolute left-2.5 top-[33px] text-gray-400">
+            <Icon name="mingcute:more-1-fill" size="24px" />
+          </div>
+          <input
+            v-model="data.category.keywords"
+            type="text"
+            name="keywords"
+            id="keywords"
+            placeholder="Keywords"
+            class="w-full rounded-lg border p-2 pl-10 focus:outline-none"
+            :class="{
+              'focus:border-sky-500': errorField !== 'keywords',
+              'border-red-500': errorField === 'keywords'
+            }"
+          />
+          <p class="text-xs text-red-500">{{ errorResponse }}</p>
+        </div>
+
+        <div class="relative col-span-2">
+          <label for="description" class="text-sm">Description (og:) SEO<sup class="text-red-500">*</sup></label>
+          <div class="absolute left-2.5 top-[33px] text-gray-400">
+            <Icon name="mingcute:information-line" size="24px" />
+          </div>
+          <textarea
+            v-model="data.category.og_description"
+            name="og_description"
+            id="og_description"
+            placeholder="Description (og:) SEO"
+            class="w-full rounded-lg border p-2 pl-10 focus:outline-none"
+            :class="{
+              'focus:border-sky-500': errorField !== 'og_description',
+              'border-red-500': errorField === 'og_description'
+            }"
+          />
+          <p class="text-xs text-red-500">{{ errorResponse }}</p>
+        </div>
       </div>
       <div class="mt-4 flex justify-end">
         <button type="submit" class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600" :disabled="loading">
@@ -103,7 +142,9 @@ const createCategory = async () => {
       body: {
         name: data.category.name,
         slug: data.category.slug,
-        description: data.category.description
+        description: data.category.description,
+        keywords: data.category.keywords,
+        og_description: data.category.og_description
       },
       timeout: 5000
     })
@@ -114,6 +155,8 @@ const createCategory = async () => {
       data.category.name = ''
       data.category.slug = ''
       data.category.description = ''
+      data.category.keywords = ''
+      data.category.og_description = ''
     }
   } catch (error) {
     throw createError({
