@@ -20,7 +20,7 @@
               'border-red-500': errorField === 'name'
             }"
           />
-          <p class="text-xs text-red-500">{{ errorResponse }}</p>
+          <p v-if="errorField === 'name'" class="text-xs text-red-500">{{ errorResponse }}</p>
         </div>
 
         <div class="relative">
@@ -40,7 +40,7 @@
               'border-red-500': errorField === 'slug'
             }"
           />
-          <p class="text-xs text-red-500">{{ errorResponse }}</p>
+          <p v-if="errorField === 'slug'" class="text-xs text-red-500">{{ errorResponse }}</p>
         </div>
 
         <div class="relative col-span-2">
@@ -59,7 +59,7 @@
               'border-red-500': errorField === 'description'
             }"
           />
-          <p class="text-xs text-red-500">{{ errorResponse }}</p>
+          <p v-if="errorField === 'description'" class="text-xs text-red-500">{{ errorResponse }}</p>
         </div>
 
         <div class="relative col-span-2">
@@ -79,7 +79,7 @@
               'border-red-500': errorField === 'keywords'
             }"
           />
-          <p class="text-xs text-red-500">{{ errorResponse }}</p>
+          <p v-if="errorField === 'keywords'" class="text-xs text-red-500">{{ errorResponse }}</p>
         </div>
 
         <div class="relative col-span-2">
@@ -98,7 +98,7 @@
               'border-red-500': errorField === 'og_description'
             }"
           />
-          <p class="text-xs text-red-500">{{ errorResponse }}</p>
+          <p v-if="errorField === 'og_description'" class="text-xs text-red-500">{{ errorResponse }}</p>
         </div>
       </div>
       <div class="mt-4 flex justify-end">
@@ -128,10 +128,10 @@ const successResponse = ref(null)
 const errorResponse = ref(null)
 
 const createCategory = async () => {
-  if (!data.category.name) {
-    errorResponse.value = 'Название категории не может быть пустым.'
-    return
-  }
+  // if (!data.category.name) {
+  //   errorResponse.value = 'Название категории не может быть пустым.'
+  //   return
+  // }
   loading.value = true
   errorField.value = null
   errorResponse.value = null
@@ -150,6 +150,7 @@ const createCategory = async () => {
     })
     if (response.error) {
       errorResponse.value = response.error
+      errorField.value = response.field
     } else {
       successResponse.value = response.message || 'Категория успешно создана.'
       data.category.name = ''
