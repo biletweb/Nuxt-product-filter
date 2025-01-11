@@ -25,7 +25,7 @@
               'border-red-500': errorField === 'name'
             }"
           />
-          <p v-if="errorField === 'name'" class="mt-1 text-xs text-red-500">{{ errorResponse }}</p>
+          <p v-if="errorField === 'name'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
         </div>
         <div class="relative">
           <label for="name" class="ms-1 text-sm">Slug</label>
@@ -44,7 +44,7 @@
               'border-red-500': errorField === 'slug'
             }"
           />
-          <p v-if="errorField === 'slug'" class="mt-1 text-xs text-red-500">{{ errorResponse }}</p>
+          <p v-if="errorField === 'slug'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
         </div>
         <div class="relative col-span-2">
           <label for="description" class="ms-1 text-sm">Description SEO<sup class="text-red-500">*</sup></label>
@@ -63,7 +63,7 @@
             }"
             rows="2"
           />
-          <p v-if="errorField === 'description'" class="mt-1 text-xs text-red-500">{{ errorResponse }}</p>
+          <p v-if="errorField === 'description'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
         </div>
       </div>
       <div class="mt-4 flex justify-end">
