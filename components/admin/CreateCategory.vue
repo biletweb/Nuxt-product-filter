@@ -58,9 +58,10 @@ const createCategory = async () => {
     })
     if (response.error) {
       errorResponse.value = response.error
+    } else {
+      successResponse.value = response.message || 'Категория успешно создана.'
+      name.value = ''
     }
-    successResponse.value = response.message
-    name.value = ''
   } catch (error) {
     throw createError({
       statusCode: error.statusCode,
