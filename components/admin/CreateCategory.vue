@@ -19,7 +19,7 @@
             'border-red-500': errorField === 'name'
           }"
         />
-        <p class="text-xs text-red-500">Ошибка</p>
+        <p class="text-xs text-red-500">{{ errorResponse }}</p>
       </div>
       <div class="flex justify-end">
         <button type="submit" class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600" :disabled="loading">
@@ -36,15 +36,22 @@ const errorField = ref(null)
 const name = ref('')
 const loading = ref(false)
 const config = useRuntimeConfig()
-const successResponse = ref('')
-const errorResponse = ref('')
+const successResponse = ref(null)
+const errorResponse = ref(null)
 
 const createCategory = async () => {
+  if (!name.value) {
+    errorResponse.value = 'Название категории не может быть пустым.'
+    return
+  }
   loading.value = true
   errorField.value = null
+  errorResponse.value = null
+  successResponse.value = null
   try {
     const response = await $fetch(config.public.backendUrl + `/category/create`, {
-      params: {
+      method: 'POST',
+      body: {
         name: name.value
       },
       timeout: 5000
