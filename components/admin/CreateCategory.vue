@@ -58,11 +58,12 @@
             name="description"
             id="description"
             placeholder="Description"
-            class="w-full rounded-lg border p-2 pl-10 focus:outline-none"
+            class="min-h-[42px] w-full rounded-lg border p-2 pl-10 focus:outline-none"
             :class="{
               'focus:border-sky-500': errorField !== 'description',
               'border-red-500': errorField === 'description'
             }"
+            rows="2"
           />
           <p v-if="errorField === 'description'" class="text-xs text-red-500">{{ errorResponse }}</p>
         </div>
@@ -97,11 +98,12 @@
             name="og_description"
             id="og_description"
             placeholder="Description (og:) SEO"
-            class="w-full rounded-lg border p-2 pl-10 focus:outline-none"
+            class="min-h-[42px] w-full rounded-lg border p-2 pl-10 focus:outline-none"
             :class="{
               'focus:border-sky-500': errorField !== 'og_description',
               'border-red-500': errorField === 'og_description'
             }"
+            rows="2"
           />
           <p v-if="errorField === 'og_description'" class="text-xs text-red-500">{{ errorResponse }}</p>
         </div>
