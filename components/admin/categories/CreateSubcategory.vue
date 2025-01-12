@@ -54,8 +54,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
 const categoryName = ref('')
 const categoryId = ref('')
 const successResponse = ref(null)
