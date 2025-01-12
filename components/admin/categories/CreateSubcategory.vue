@@ -17,7 +17,7 @@
             <Icon name="mingcute:folder-open-line" size="24px" />
           </div>
           <input
-            v-model="category"
+            v-model="categoryName"
             type="text"
             name="category"
             id="category"
@@ -41,7 +41,7 @@
               v-for="cat in filteredCategories"
               :key="cat.id"
               class="cursor-pointer px-4 py-2 hover:bg-sky-100"
-              @click="selectCategory(cat.name)"
+              @click="selectCategory(cat)"
             >
               {{ cat.name }}
             </li>
@@ -99,19 +99,22 @@
         </button>
       </div>
     </form>
+    Выбрана категория: {{ categoryName }} ID: {{ categoryId }}
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 
-const category = ref('')
+const categoryName = ref('')
+const categoryId = ref('')
 const subcategory = ref('')
 const name = ref('')
 const loading = ref(false)
 const successResponse = ref(null)
 const errorResponse = ref(null)
 const errorField = ref(null)
+const filteredCategories = ref([])
 const categories = ref([
   { id: 1, name: 'Телевизоры' },
   { id: 2, name: 'Приставки' },
@@ -124,22 +127,20 @@ const categories = ref([
   { id: 9, name: 'Клавиатуры' },
   { id: 10, name: 'Корпуса' },
 ])
-const filteredCategories = ref([])
 
-// Фильтрация категорий
 const filterCategories = () => {
-  if (category.value) {
+  if (categoryName.value) {
     filteredCategories.value = categories.value.filter(cat =>
-      cat.name.toLowerCase().includes(category.value.toLowerCase())
+      cat.name.toLowerCase().includes(categoryName.value.toLowerCase())
     )
   } else {
     filteredCategories.value = []
   }
 }
 
-// Выбор категории
-const selectCategory = (name) => {
-  category.value = name
-  filteredCategories.value = [] // Очистка списка после выбора
+const selectCategory = (category) => {
+  categoryName.value = category.name
+  categoryId.value = category.id
+  filteredCategories.value = []
 }
 </script>
