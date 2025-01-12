@@ -40,6 +40,12 @@
               {{ cat.name }}
             </li>
           </ul>
+          <ul
+            v-else-if="categoryName.length > 0"
+            class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
+          >
+            <li class="px-4 py-2">Ничего не найдено</li>
+          </ul>
         </div>
       </div>
     </form>
@@ -82,4 +88,11 @@ const selectCategory = (category) => {
   categoryId.value = category.id
   filteredCategories.value = []
 }
+
+watch(categoryName, () => {
+  if (categoryName.value === '') {
+    filteredCategories.value = []
+    categoryId.value = ''
+  }
+})
 </script>
