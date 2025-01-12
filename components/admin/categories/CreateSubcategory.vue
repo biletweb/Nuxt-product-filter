@@ -49,7 +49,7 @@
         </div>
       </div>
     </form>
-    <span v-if="categoryId">Выбрана категория: {{ categoryName }} ID: {{ categoryId }}</span>
+    <span v-if="categoryId">{{ categoryName }} ID: {{ categoryId }}</span>
   </div>
 </template>
 
