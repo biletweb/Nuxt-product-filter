@@ -37,7 +37,7 @@
             class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
           >
             <li
-              v-for="(cat, index) in filteredCategories"
+              v-for="cat in filteredCategories"
               :key="cat.id"
               class="cursor-pointer px-4 py-2 hover:bg-sky-100"
               @click="selectCategory(cat)"
