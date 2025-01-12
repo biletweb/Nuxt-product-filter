@@ -86,10 +86,7 @@ const filterCategories = () => {
   if (categoryName.value) {
     filteredCategories.value = categories.value.filter((cat) => cat.name.toLowerCase().includes(categoryName.value.toLowerCase()))
   } else {
-    filteredCategories.value = categories.value
-    if (categoryName.value === '') {
-      filteredCategories.value = []
-    }
+    filteredCategories.value = []
   }
 }
 
