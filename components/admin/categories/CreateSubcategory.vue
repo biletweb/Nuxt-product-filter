@@ -34,12 +34,13 @@
           <p v-if="errorField === 'category'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
           <ul
             v-if="filteredCategories.length"
-            class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
+            class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white p-4"
           >
             <li
-              v-for="cat in filteredCategories"
+              v-for="(cat, index) in filteredCategories"
               :key="cat.id"
-              class="cursor-pointer px-4 py-2 hover:bg-sky-100"
+              class="cursor-pointer rounded-lg px-4 py-2 hover:bg-sky-100"
+              :class="{ 'mb-2': index !== filteredCategories.length - 1 }"
               @click="selectCategory(cat)"
             >
               {{ cat.name }}
