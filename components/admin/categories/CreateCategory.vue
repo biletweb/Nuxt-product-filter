@@ -1,6 +1,6 @@
 <template>
   <div class="rounded-lg border border-slate-300 bg-slate-100 p-4">
-    <div class="flex items-center justify-between">
+    <div class="mb-4 flex items-center justify-between">
       <div class="text-xl font-bold">{{ $t('Create category') }}</div>
       <div v-if="successResponse" class="rounded-lg border border-green-100 bg-green-50 p-1 text-xs text-green-500">
         {{ successResponse }}
