@@ -24,7 +24,7 @@
               'focus:border-sky-500': errorField !== 'category',
               'border-red-500': errorField === 'category'
             }"
-            @input="filterCategories"
+            @input="handleInput"
           />
           <p v-if="errorField === 'category'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
           <ul
@@ -75,6 +75,11 @@ const categories = ref([
   { id: 10, name: 'Корпуса' }
 ])
 
+const handleInput = () => {
+  categoryId.value = ''
+  filterCategories()
+}
+
 const filterCategories = () => {
   if (categoryName.value) {
     filteredCategories.value = categories.value.filter((cat) => cat.name.toLowerCase().includes(categoryName.value.toLowerCase()))
@@ -88,11 +93,4 @@ const selectCategory = (category) => {
   categoryId.value = category.id
   filteredCategories.value = []
 }
-
-watch(categoryName, () => {
-  if (categoryName.value === '') {
-    filteredCategories.value = []
-    categoryId.value = ''
-  }
-})
 </script>
