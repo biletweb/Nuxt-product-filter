@@ -14,8 +14,8 @@
             <Icon name="mingcute:folder-open-line" size="24px" />
           </div>
           <div class="absolute right-2.5 top-[33px] text-gray-400">
-            <Icon v-if="filteredCategories.length" name="mingcute:arrow-down-fill" size="24px" />
-            <Icon v-else name="mingcute:arrow-left-fill" size="24px" />
+            <Icon v-if="filteredCategories.length" name="mingcute:down-fill" size="24px" />
+            <Icon v-else name="mingcute:left-fill" size="24px" />
           </div>
           <input
             v-model="categoryName"
@@ -23,7 +23,7 @@
             name="category"
             id="category"
             :placeholder="$t('Select category')"
-            class="w-full rounded-lg border p-2 pl-10 focus:outline-none"
+            class="w-full rounded-lg border p-2 pl-10 pr-8 focus:outline-none"
             :class="{
               'focus:border-sky-500': errorField !== 'category',
               'border-red-500': errorField === 'category'
@@ -86,7 +86,10 @@ const filterCategories = () => {
   if (categoryName.value) {
     filteredCategories.value = categories.value.filter((cat) => cat.name.toLowerCase().includes(categoryName.value.toLowerCase()))
   } else {
-    filteredCategories.value = []
+    filteredCategories.value = categories.value
+    if (categoryName.value === '') {
+      filteredCategories.value = []
+    }
   }
 }
 
