@@ -28,7 +28,7 @@
           />
           <p v-if="errorField === 'category'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
           <ul
-            v-if="filteredCategories.length > 0"
+            v-if="filteredCategories.length"
             class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
           >
             <li
@@ -41,7 +41,7 @@
             </li>
           </ul>
           <ul
-            v-else-if="categoryName.length > 0"
+            v-else-if="categoryName && !categoryId"
             class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
           >
             <li class="px-4 py-2">Ничего не найдено</li>
