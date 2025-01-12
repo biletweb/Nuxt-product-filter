@@ -14,8 +14,9 @@
             <Icon name="mingcute:folder-open-line" size="24px" />
           </div>
           <div class="absolute right-2.5 top-[33px] text-gray-400">
-            <Icon v-if="filteredCategories.length" name="mingcute:down-fill" size="24px" />
-            <Icon v-else name="mingcute:left-fill" size="24px" />
+            <Icon v-if="filteredCategories.length" name="mingcute:down-fill" size="24px" class="text-green-300" />
+            <Icon v-else-if="!categoryName" name="mingcute:left-fill" size="24px" class="text-red-300" />
+            <Icon v-if="categoryId" name="mingcute:check-circle-line" size="24px" class="text-green-300" />
           </div>
           <input
             v-model="categoryName"
