@@ -13,6 +13,10 @@
           <div class="absolute left-2.5 top-[33px] text-gray-400">
             <Icon name="mingcute:folder-open-line" size="24px" />
           </div>
+          <div class="absolute right-2.5 top-[33px] text-gray-400">
+            <Icon v-if="filteredCategories.length" name="mingcute:arrow-down-fill" size="24px" />
+            <Icon v-else name="mingcute:arrow-left-fill" size="24px" />
+          </div>
           <input
             v-model="categoryName"
             type="text"
