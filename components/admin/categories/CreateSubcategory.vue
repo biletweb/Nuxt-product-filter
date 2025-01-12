@@ -8,11 +8,8 @@
     </div>
     <form @submit.prevent="">
       <div class="grid grid-cols-2 gap-4">
-        <!-- Поле для ввода категории -->
         <div class="relative">
-          <label for="category" class="ms-1 text-sm">
-            {{ $t('Select category') }}<sup class="text-red-500">*</sup>
-          </label>
+          <label for="category" class="ms-1 text-sm"> {{ $t('Select category') }}<sup class="text-red-500">*</sup> </label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
             <Icon name="mingcute:folder-open-line" size="24px" />
           </div>
@@ -29,10 +26,7 @@
             }"
             @input="filterCategories"
           />
-          <!-- Ошибка валидации -->
           <p v-if="errorField === 'category'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
-
-          <!-- Список автодополнения -->
           <ul
             v-if="filteredCategories.length > 0"
             class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
@@ -47,59 +41,9 @@
             </li>
           </ul>
         </div>
-
-        <!-- Поле для ввода подкатегории -->
-        <div v-if="category" class="relative">
-          <label for="subcategory" class="ms-1 text-sm">{{ $t('Select subcategory') }}</label>
-          <div class="absolute left-2.5 top-[33px] text-gray-400">
-            <Icon name="mingcute:folder-open-line" size="24px" />
-          </div>
-          <input
-            v-model="subcategory"
-            type="text"
-            name="subcategory"
-            id="subcategory"
-            :placeholder="$t('Select subcategory')"
-            class="w-full rounded-lg border p-2 pl-10 focus:outline-none"
-            :class="{
-              'focus:border-sky-500': errorField !== 'subcategory',
-              'border-red-500': errorField === 'subcategory'
-            }"
-          />
-          <p v-if="errorField === 'subcategory'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
-        </div>
-
-        <!-- Поле для ввода названия -->
-        <div class="relative col-span-2">
-          <div v-if="category" class="relative">
-            <label for="name" class="ms-1 text-sm">{{ $t('Name') }}<sup class="text-red-500">*</sup></label>
-            <div class="absolute left-2.5 top-[33px] text-gray-400">
-              <Icon name="mingcute:folder-open-line" size="24px" />
-            </div>
-            <input
-              v-model="name"
-              type="text"
-              name="name"
-              id="name"
-              :placeholder="$t('Name')"
-              class="w-full rounded-lg border p-2 pl-10 focus:outline-none"
-              :class="{
-                'focus:border-sky-500': errorField !== 'name',
-                'border-red-500': errorField === 'name'
-              }"
-            />
-            <p v-if="errorField === 'name'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="mt-4 flex justify-end">
-        <button type="submit" class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600" :disabled="loading">
-          <Icon v-if="loading" name="svg-spinners:8-dots-rotate" size="24px" class="flex" />
-          <span v-else>{{ $t('Create') }}</span>
-        </button>
       </div>
     </form>
-    Выбрана категория: {{ categoryName }} ID: {{ categoryId }}
+    <span v-if="categoryId">Выбрана категория: {{ categoryName }} ID: {{ categoryId }}</span>
   </div>
 </template>
 
@@ -108,9 +52,6 @@ import { ref } from 'vue'
 
 const categoryName = ref('')
 const categoryId = ref('')
-const subcategory = ref('')
-const name = ref('')
-const loading = ref(false)
 const successResponse = ref(null)
 const errorResponse = ref(null)
 const errorField = ref(null)
@@ -125,14 +66,12 @@ const categories = ref([
   { id: 7, name: 'Мониторы' },
   { id: 8, name: 'Мышки' },
   { id: 9, name: 'Клавиатуры' },
-  { id: 10, name: 'Корпуса' },
+  { id: 10, name: 'Корпуса' }
 ])
 
 const filterCategories = () => {
   if (categoryName.value) {
-    filteredCategories.value = categories.value.filter(cat =>
-      cat.name.toLowerCase().includes(categoryName.value.toLowerCase())
-    )
+    filteredCategories.value = categories.value.filter((cat) => cat.name.toLowerCase().includes(categoryName.value.toLowerCase()))
   } else {
     filteredCategories.value = []
   }
