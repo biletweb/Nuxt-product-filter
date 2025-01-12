@@ -3,5 +3,8 @@
   "Name": "Name",
   "Slug": "Slug",
   "Description SEO": "Description SEO",
-  "Create": "Create"
+  "Create": "Create",
+  "Create subcategory": "Create subcategory",
+  "Select category": "Select category",
+  "Select subcategory": "Select subcategory"
 }

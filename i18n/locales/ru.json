@@ -3,5 +3,8 @@
   "Name": "Название",
   "Slug": "URL-ярлык",
   "Description SEO": "Описание SEO",
-  "Create": "Создать"
+  "Create": "Создать",
+  "Create subcategory": "Создать подкатегорию",
+  "Select category": "Выберите категорию",
+  "Select subcategory": "Выберите подкатегорию"
 }
