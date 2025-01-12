@@ -24,7 +24,7 @@
               'focus:border-sky-500': errorField !== 'category',
               'border-red-500': errorField === 'category'
             }"
-            @input="handleInput"
+            @input="handleCategoryInput"
           />
           <p v-if="errorField === 'category'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
           <ul
@@ -44,7 +44,7 @@
             v-else-if="categoryName && !categoryId"
             class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
           >
-            <li class="px-4 py-2">Ничего не найдено</li>
+            <li class="px-4 py-2">{{ $t('Nothing found') }}</li>
           </ul>
         </div>
       </div>
@@ -73,7 +73,7 @@ const categories = ref([
   { id: 10, name: 'Корпуса' }
 ])
 
-const handleInput = () => {
+const handleCategoryInput = () => {
   categoryId.value = ''
   filterCategories()
 }
