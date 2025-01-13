@@ -100,12 +100,31 @@
             <li class="px-4 py-2">{{ $t('Nothing found') }}</li>
           </ul>
         </div>
-        <!-- <div>
-          <Icon v-if="loadingGetSubcategories" name="svg-spinners:8-dots-rotate" size="24px" class="text-sky-500" />
-          <div v-else v-for="subcategory in subcategories" :key="subcategory.id">
-            {{ subcategory.name }}
+        <div v-if="subcategoryId" class="relative col-span-2">
+          <label for="name" class="ms-1 text-sm">{{ $t('Name') }}<sup class="text-red-500">*</sup></label>
+          <div class="absolute left-2.5 top-[33px] text-gray-400">
+            <Icon name="mingcute:folder-open-line" size="24px" />
           </div>
-        </div> -->
+          <input
+            v-model="name"
+            type="text"
+            name="name"
+            id="name"
+            :placeholder="$t('Name')"
+            class="w-full rounded-lg border p-2 pl-10 pr-8 focus:outline-none"
+            :class="{
+              'focus:border-sky-500': errorField !== 'name',
+              'border-red-500': errorField === 'name'
+            }"
+          />
+          <p v-if="errorField === 'name'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
+        </div>
+      </div>
+      <div v-if="name" class="mt-4 flex justify-end">
+        <button type="submit" class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600" :disabled="loading">
+          <Icon v-if="loading" name="svg-spinners:8-dots-rotate" size="24px" class="flex" />
+          <span v-else>{{ $t('Create') }}</span>
+        </button>
       </div>
     </form>
   </div>
@@ -114,6 +133,7 @@
 <script setup>
 const categoryName = ref('')
 const subcategoryName = ref('')
+const name = ref('')
 const categoryId = ref('')
 const subcategoryId = ref('')
 const successResponse = ref(null)
