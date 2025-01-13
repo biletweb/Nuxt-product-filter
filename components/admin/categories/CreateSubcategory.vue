@@ -68,6 +68,8 @@ const errorResponse = ref(null)
 const errorField = ref(null)
 const filteredCategories = ref([])
 const config = useRuntimeConfig()
+const loadingGetSubcategories = ref(false)
+const subcategories = ref([])
 
 const { data, status, error } = await useLazyFetch(config.public.backendUrl + `/admin/category/get-categories`, {
   timeout: 5000
@@ -104,6 +106,24 @@ const selectCategory = (category) => {
 }
 
 const getSubcategories = async (categoryId) => {
-  console.log('Getting subcategories for category ID: ', categoryId)
+  loadingGetSubcategories.value = true
+  try {
+    const response = await $fetch(config.public.backendUrl + `/admin/category/get-subcategories`, {
+      params: {
+        categoryId: categoryId
+      },
+      timeout: 5000
+    })
+    subcategories.value = response.subcategories
+    console.log(subcategories.value)
+  } catch (error) {
+    throw createError({
+      statusCode: error.statusCode,
+      statusMessage: error.response?._data?.name || error.statusMessage || 'Request aborted due to timeout',
+      fatal: true
+    })
+  } finally {
+    loadingGetSubcategories.value = false
+  }
 }
 </script>
