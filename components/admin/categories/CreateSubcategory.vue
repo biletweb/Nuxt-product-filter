@@ -55,12 +55,57 @@
             <li class="px-4 py-2">{{ $t('Nothing found') }}</li>
           </ul>
         </div>
-        <div>
+        <Icon v-if="loadingGetSubcategories" name="svg-spinners:8-dots-rotate" size="24px" class="text-sky-500" />
+        <div v-else-if="subcategories.length" class="relative">
+          <label for="category" class="ms-1 text-sm"> {{ $t('Name') }}<sup class="text-red-500">*</sup> </label>
+          <div class="absolute left-2.5 top-[33px] text-gray-400">
+            <Icon name="mingcute:folder-open-line" size="24px" />
+          </div>
+          <div class="absolute right-2.5 top-[33px] text-gray-400">
+            <Icon v-if="filteredSubcategories.length" name="mingcute:down-fill" size="24px" class="text-gray-400" />
+            <Icon v-else-if="!subcategoryName" name="mingcute:left-fill" size="24px" class="text-gray-400" />
+            <Icon v-else-if="subcategoryId" name="mingcute:check-circle-line" size="24px" class="text-green-300" />
+          </div>
+          <input
+            v-model="subcategoryName"
+            type="text"
+            name="subcategory"
+            id="subcategory"
+            :placeholder="$t('Name')"
+            class="w-full rounded-lg border p-2 pl-10 pr-8 focus:outline-none"
+            :class="{
+              'focus:border-sky-500': errorField !== 'subcategory',
+              'border-red-500': errorField === 'subcategory'
+            }"
+            @input="handleSubcategoryInput"
+          />
+          <p v-if="errorField === 'subcategory'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
+          <ul
+            v-if="filteredSubcategories.length"
+            class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
+          >
+            <li
+              v-for="subcat in filteredSubcategories"
+              :key="subcat.id"
+              class="cursor-pointer px-4 py-2 hover:bg-sky-100"
+              @click="selectSubcategory(subcat)"
+            >
+              {{ subcat.name }}
+            </li>
+          </ul>
+          <ul
+            v-else-if="subcategoryName && !subcategoryId"
+            class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
+          >
+            <li class="px-4 py-2">{{ $t('Nothing found') }}</li>
+          </ul>
+        </div>
+        <!-- <div>
           <Icon v-if="loadingGetSubcategories" name="svg-spinners:8-dots-rotate" size="24px" class="text-sky-500" />
           <div v-else v-for="subcategory in subcategories" :key="subcategory.id">
             {{ subcategory.name }}
           </div>
-        </div>
+        </div> -->
       </div>
     </form>
   </div>
@@ -68,11 +113,14 @@
 
 <script setup>
 const categoryName = ref('')
+const subcategoryName = ref('')
 const categoryId = ref('')
+const subcategoryId = ref('')
 const successResponse = ref(null)
 const errorResponse = ref(null)
 const errorField = ref(null)
 const filteredCategories = ref([])
+const filteredSubcategories = ref([])
 const config = useRuntimeConfig()
 const loadingGetSubcategories = ref(false)
 const subcategories = ref([])
@@ -93,6 +141,11 @@ const handleCategoryInput = () => {
   filterCategories()
 }
 
+const handleSubcategoryInput = () => {
+  subcategoryId.value = ''
+  filterSubcategories()
+}
+
 const filterCategories = () => {
   if (categoryName.value) {
     filteredCategories.value = data.value.categories.filter((cat) =>
@@ -103,11 +156,27 @@ const filterCategories = () => {
   }
 }
 
+const filterSubcategories = () => {
+  if (subcategoryName.value) {
+    filteredSubcategories.value = subcategories.value.filter((cat) =>
+      cat.name.toLowerCase().includes(subcategoryName.value.toLowerCase())
+    )
+  } else {
+    filteredSubcategories.value = []
+  }
+}
+
 const selectCategory = (category) => {
   categoryName.value = category.name
   categoryId.value = category.id
   filteredCategories.value = []
   getSubcategories(categoryId.value)
+}
+
+const selectSubcategory = (subcategory) => {
+  subcategoryName.value = subcategory.name
+  subcategoryId.value = subcategory.id
+  filteredSubcategories.value = []
 }
 
 const getSubcategories = async (categoryId) => {
