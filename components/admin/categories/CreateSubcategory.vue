@@ -28,9 +28,11 @@
             class="w-full rounded-lg border p-2 pl-10 pr-8 focus:outline-none"
             :class="{
               'focus:border-sky-500': errorField !== 'category',
-              'border-red-500': errorField === 'category'
+              'border-red-500': errorField === 'category',
+              'bg-gray-100': status === 'pending'
             }"
             @input="handleCategoryInput"
+            :disabled="status === 'pending'"
           />
           <p v-if="errorField === 'category'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
           <ul
