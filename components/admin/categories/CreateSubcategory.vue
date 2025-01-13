@@ -115,7 +115,6 @@ const getSubcategories = async (categoryId) => {
       timeout: 5000
     })
     subcategories.value = response.subcategories
-    console.log(subcategories.value)
   } catch (error) {
     throw createError({
       statusCode: error.statusCode,
