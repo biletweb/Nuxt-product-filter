@@ -57,7 +57,7 @@
         </div>
       </div>
     </form>
-    <span v-if="categoryId">{{ categoryName }} ID: {{ categoryId }}</span>
+    <span v-if="categoryId">ID: {{ categoryId }}</span>
   </div>
 </template>
 
