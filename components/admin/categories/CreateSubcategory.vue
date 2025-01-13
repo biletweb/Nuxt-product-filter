@@ -14,9 +14,10 @@
             <Icon name="mingcute:folder-open-line" size="24px" />
           </div>
           <div class="absolute right-2.5 top-[33px] text-gray-400">
-            <Icon v-if="filteredCategories.length" name="mingcute:down-fill" size="24px" class="text-gray-400" />
+            <Icon v-if="status === 'pending'" name="svg-spinners:8-dots-rotate" size="24px" class="text-sky-500" />
+            <Icon v-else-if="filteredCategories.length" name="mingcute:down-fill" size="24px" class="text-gray-400" />
             <Icon v-else-if="!categoryName" name="mingcute:left-fill" size="24px" class="text-gray-400" />
-            <Icon v-if="categoryId" name="mingcute:check-circle-line" size="24px" class="text-green-300" />
+            <Icon v-else-if="categoryId" name="mingcute:check-circle-line" size="24px" class="text-green-300" />
           </div>
           <input
             v-model="categoryName"
@@ -65,18 +66,19 @@ const successResponse = ref(null)
 const errorResponse = ref(null)
 const errorField = ref(null)
 const filteredCategories = ref([])
-const categories = ref([
-  { id: 1, name: 'Телевизоры' },
-  { id: 2, name: 'Приставки' },
-  { id: 3, name: 'Холодильники' },
-  { id: 4, name: 'Компьютеры' },
-  { id: 5, name: 'Смартфоны' },
-  { id: 6, name: 'Телефоны' },
-  { id: 7, name: 'Мониторы' },
-  { id: 8, name: 'Мышки' },
-  { id: 9, name: 'Клавиатуры' },
-  { id: 10, name: 'Корпуса' }
-])
+const config = useRuntimeConfig()
+
+const { data, status, error } = await useLazyFetch(config.public.backendUrl + `/admin/category/get-categories`, {
+  timeout: 5000
+})
+
+if (error.value) {
+  throw createError({
+    statusCode: error.value.statusCode,
+    statusMessage: error.value.statusMessage || 'Request aborted due to timeout',
+    fatal: true
+  })
+}
 
 const handleCategoryInput = () => {
   categoryId.value = ''
@@ -85,7 +87,9 @@ const handleCategoryInput = () => {
 
 const filterCategories = () => {
   if (categoryName.value) {
-    filteredCategories.value = categories.value.filter((cat) => cat.name.toLowerCase().includes(categoryName.value.toLowerCase()))
+    filteredCategories.value = data.value.categories.filter((cat) =>
+      cat.name.toLowerCase().includes(categoryName.value.toLowerCase())
+    )
   } else {
     filteredCategories.value = []
   }

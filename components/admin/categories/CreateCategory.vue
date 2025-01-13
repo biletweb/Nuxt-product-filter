@@ -96,7 +96,7 @@ const createCategory = async () => {
   errorResponse.value = null
   successResponse.value = null
   try {
-    const response = await $fetch(config.public.backendUrl + `/category/create`, {
+    const response = await $fetch(config.public.backendUrl + `/admin/category/create`, {
       method: 'POST',
       body: {
         name: data.category.name,
