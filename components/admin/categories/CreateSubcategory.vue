@@ -120,7 +120,7 @@
           <p v-if="errorField === 'name'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
         </div>
       </div>
-      <div class="mt-4 flex justify-end">
+      <div v-if="subcategoryId" class="mt-4 flex justify-end">
         <button type="submit" class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600" :disabled="loading">
           <Icon v-if="loading" name="svg-spinners:8-dots-rotate" size="24px" class="flex" />
           <span v-else>{{ $t('Create') }}</span>
@@ -158,6 +158,10 @@ if (error.value) {
 
 const handleCategoryInput = () => {
   categoryId.value = ''
+  subcategoryName.value = ''
+  subcategoryId.value = ''
+  subcategories.value = []
+  filteredSubcategories.value = []
   filterCategories()
 }
 
