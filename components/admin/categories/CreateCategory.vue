@@ -115,10 +115,9 @@ const createCategory = async () => {
       data.category.description = ''
     }
   } catch (error) {
-    throw createError({
+    showError({
       statusCode: error.statusCode,
-      statusMessage: error.response?._data?.name || error.statusMessage || 'Request aborted due to timeout',
-      fatal: true
+      statusMessage: error.response?._data?.name || error.statusMessage || 'Request aborted due to timeout'
     })
   } finally {
     loading.value = false

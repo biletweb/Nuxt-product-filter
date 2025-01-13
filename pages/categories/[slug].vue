@@ -58,10 +58,9 @@ const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/
 })
 
 if (error.value) {
-  throw createError({
-    statusCode: error.value.statusCode,
-    statusMessage: error.value.statusMessage || 'Request aborted due to timeout',
-    fatal: true
+  showError({
+    statusCode: error.statusCode,
+    statusMessage: error.value.statusMessage || 'Request aborted due to timeout'
   })
 }
 
@@ -89,10 +88,9 @@ const loadMore = async () => {
     data.value.products = [...data.value.products, ...response.products]
     hasMore.value = response.products.length >= limit
   } catch (error) {
-    throw createError({
+    showError({
       statusCode: error.statusCode,
-      statusMessage: error.response?._data?.name || error.statusMessage || 'Request aborted due to timeout',
-      fatal: true
+      statusMessage: error.response?._data?.name || error.statusMessage || 'Request aborted due to timeout'
     })
   } finally {
     loadingHasMore.value = false
@@ -128,10 +126,9 @@ const filterChange = async (filters) => {
       router.push('/categories')
     }
   } catch (error) {
-    throw createError({
+    showError({
       statusCode: error.statusCode,
-      statusMessage: error.response?._data?.name || error.statusMessage || 'Request aborted due to timeout',
-      fatal: true
+      statusMessage: error.response?._data?.name || error.statusMessage || 'Request aborted due to timeout'
     })
   } finally {
     loadingChangeFilters.value = false

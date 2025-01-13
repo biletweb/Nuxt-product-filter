@@ -18,10 +18,9 @@ const { data, error, status } = await useLazyFetch(config.public.backendUrl + `/
 })
 
 if (error.value) {
-  throw createError({
-    statusCode: error.value.statusCode,
-    statusMessage: error.value.statusMessage || 'Request aborted due to timeout',
-    fatal: true
+  showError({
+    statusCode: error.statusCode,
+    statusMessage: error.value.statusMessage || 'Request aborted due to timeout'
   })
 }
 </script>
