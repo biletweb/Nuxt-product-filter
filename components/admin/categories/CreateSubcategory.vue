@@ -118,7 +118,7 @@ const getSubcategories = async (categoryId) => {
       params: {
         categoryId: categoryId
       },
-      timeout: 50
+      timeout: 5000
     })
     subcategories.value = response.subcategories
   } catch (error) {
