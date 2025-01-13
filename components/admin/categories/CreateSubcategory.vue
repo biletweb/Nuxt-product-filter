@@ -55,6 +55,12 @@
             <li class="px-4 py-2">{{ $t('Nothing found') }}</li>
           </ul>
         </div>
+        <div>
+          <Icon v-if="loadingGetSubcategories" name="svg-spinners:8-dots-rotate" size="24px" class="text-sky-500" />
+          <div v-else v-for="subcategory in subcategories" :key="subcategory.id">
+            {{ subcategory.name }}
+          </div>
+        </div>
       </div>
     </form>
   </div>
@@ -112,7 +118,7 @@ const getSubcategories = async (categoryId) => {
       params: {
         categoryId: categoryId
       },
-      timeout: 5000
+      timeout: 50
     })
     subcategories.value = response.subcategories
   } catch (error) {
