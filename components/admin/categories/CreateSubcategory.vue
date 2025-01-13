@@ -57,7 +57,6 @@
         </div>
       </div>
     </form>
-    <span v-if="categoryId">ID: {{ categoryId }}</span>
   </div>
 </template>
 
@@ -101,5 +100,10 @@ const selectCategory = (category) => {
   categoryName.value = category.name
   categoryId.value = category.id
   filteredCategories.value = []
+  getSubcategories(categoryId.value)
+}
+
+const getSubcategories = async (categoryId) => {
+  console.log('Getting subcategories for category ID: ', categoryId)
 }
 </script>
