@@ -11,7 +11,7 @@
         <div class="relative">
           <label for="name" class="ms-1 text-sm">{{ $t('Name') }}<sup class="text-red-500">*</sup></label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
-            <Icon name="mingcute:folder-open-line" size="24px" />
+            <Icon name="mingcute:folder-line" size="24px" />
           </div>
           <input
             v-model="data.category.name"
@@ -30,7 +30,7 @@
         <div class="relative">
           <label for="name" class="ms-1 text-sm">{{ $t('Slug') }}</label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
-            <Icon name="mingcute:copy-3-line" size="24px" />
+            <Icon name="mingcute:folders-line" size="24px" />
           </div>
           <input
             v-model="data.category.slug"

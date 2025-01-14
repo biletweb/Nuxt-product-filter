@@ -10,7 +10,7 @@
       <div class="relative">
         <label for="category" class="ms-1 text-sm"> {{ $t('Parent category name') }}<sup class="text-red-500">*</sup> </label>
         <div class="absolute left-2.5 top-[33px] text-gray-400">
-          <Icon name="mingcute:folder-open-line" size="24px" />
+          <Icon name="mingcute:folder-line" size="24px" />
         </div>
         <div class="absolute right-2.5 top-[33px] text-gray-400">
           <Icon v-if="status === 'pending'" name="svg-spinners:8-dots-rotate" size="24px" class="text-sky-500" />
@@ -58,7 +58,7 @@
         <div class="relative">
           <label for="name" class="ms-1 text-sm">{{ $t('Name') }}<sup class="text-red-500">*</sup></label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
-            <Icon name="mingcute:folder-open-line" size="24px" />
+            <Icon name="mingcute:folder-line" size="24px" />
           </div>
           <input
             v-model="name"
@@ -77,7 +77,7 @@
         <div class="relative">
           <label for="name" class="ms-1 text-sm">{{ $t('Slug') }}</label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
-            <Icon name="mingcute:copy-3-line" size="24px" />
+            <Icon name="mingcute:folders-line" size="24px" />
           </div>
           <input
             v-model="slug"
