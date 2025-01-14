@@ -100,7 +100,7 @@
             <li class="px-4 py-2">{{ $t('Nothing found') }}</li>
           </ul>
         </div>
-        <div v-if="subcategoryId" class="relative">
+        <div class="relative">
           <label for="name" class="ms-1 text-sm">{{ $t('Name') }}<sup class="text-red-500">*</sup></label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
             <Icon name="mingcute:folder-open-line" size="24px" />
@@ -119,7 +119,7 @@
           />
           <p v-if="errorField === 'name'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
         </div>
-        <div v-if="subcategoryId" class="relative">
+        <div class="relative">
           <label for="name" class="ms-1 text-sm">{{ $t('Slug') }}</label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
             <Icon name="mingcute:copy-3-line" size="24px" />
@@ -138,7 +138,7 @@
           />
           <p v-if="errorField === 'slug'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
         </div>
-        <div v-if="subcategoryId" class="relative col-span-2">
+        <div class="relative col-span-2">
           <label for="description" class="ms-1 text-sm">{{ $t('Description SEO') }}<sup class="text-red-500">*</sup></label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
             <Icon name="mingcute:information-line" size="24px" />
@@ -158,7 +158,7 @@
           <p v-if="errorField === 'description'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
         </div>
       </div>
-      <div v-if="subcategoryId" class="mt-4 flex justify-end">
+      <div class="mt-4 flex justify-end">
         <button type="submit" class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600" :disabled="loadingCreateSubcategory">
           <Icon v-if="loadingCreateSubcategory" name="svg-spinners:8-dots-rotate" size="24px" class="flex" />
           <span v-else>{{ $t('Create') }}</span>
