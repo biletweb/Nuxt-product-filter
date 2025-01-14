@@ -7,54 +7,55 @@
       </div>
     </div>
     <form @submit.prevent="createSubcategory">
-      <div class="grid grid-cols-2 gap-4">
-        <div class="relative col-span-2">
-          <label for="category" class="ms-1 text-sm"> {{ $t('Name') }}<sup class="text-red-500">*</sup> </label>
-          <div class="absolute left-2.5 top-[33px] text-gray-400">
-            <Icon name="mingcute:folder-open-line" size="24px" />
-          </div>
-          <div class="absolute right-2.5 top-[33px] text-gray-400">
-            <Icon v-if="status === 'pending'" name="svg-spinners:8-dots-rotate" size="24px" class="text-sky-500" />
-            <Icon v-else-if="filteredCategories.length" name="mingcute:down-fill" size="24px" class="text-gray-400" />
-            <Icon v-else-if="!categoryName" name="mingcute:left-fill" size="24px" class="text-gray-400" />
-            <Icon v-else-if="categoryId" name="mingcute:check-circle-line" size="24px" class="text-green-300" />
-          </div>
-          <input
-            v-model="categoryName"
-            type="text"
-            name="category"
-            id="category"
-            :placeholder="$t('Name')"
-            class="w-full rounded-lg border p-2 pl-10 pr-8 focus:outline-none"
-            :class="{
-              'focus:border-sky-500': errorField !== 'category',
-              'border-red-500': errorField === 'category',
-              'bg-gray-100': status === 'pending'
-            }"
-            @input="handleCategoryInput"
-            :disabled="status === 'pending'"
-          />
-          <p v-if="errorField === 'category'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
-          <ul
-            v-if="filteredCategories.length"
-            class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
-          >
-            <li
-              v-for="cat in filteredCategories"
-              :key="cat.id"
-              class="cursor-pointer px-4 py-2 hover:bg-sky-100"
-              @click="selectCategory(cat)"
-            >
-              {{ cat.name }}
-            </li>
-          </ul>
-          <ul
-            v-else-if="categoryName && !categoryId"
-            class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
-          >
-            <li class="px-4 py-2">{{ $t('Nothing found') }}</li>
-          </ul>
+      <div class="relative">
+        <label for="category" class="ms-1 text-sm"> {{ $t('Name') }}<sup class="text-red-500">*</sup> </label>
+        <div class="absolute left-2.5 top-[33px] text-gray-400">
+          <Icon name="mingcute:folder-open-line" size="24px" />
         </div>
+        <div class="absolute right-2.5 top-[33px] text-gray-400">
+          <Icon v-if="status === 'pending'" name="svg-spinners:8-dots-rotate" size="24px" class="text-sky-500" />
+          <Icon v-else-if="filteredCategories.length" name="mingcute:down-fill" size="24px" class="text-gray-400" />
+          <Icon v-else-if="!categoryName" name="mingcute:left-fill" size="24px" class="text-gray-400" />
+          <Icon v-else-if="categoryId" name="mingcute:check-circle-line" size="24px" class="text-green-300" />
+        </div>
+        <input
+          v-model="categoryName"
+          type="text"
+          name="category"
+          id="category"
+          :placeholder="$t('Name')"
+          class="w-full rounded-lg border p-2 pl-10 pr-8 focus:outline-none"
+          :class="{
+            'focus:border-sky-500': errorField !== 'category',
+            'border-red-500': errorField === 'category',
+            'bg-gray-100': status === 'pending'
+          }"
+          @input="handleCategoryInput"
+          :disabled="status === 'pending'"
+        />
+        <p v-if="errorField === 'category'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
+        <ul
+          v-if="filteredCategories.length"
+          class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
+        >
+          <li
+            v-for="cat in filteredCategories"
+            :key="cat.id"
+            class="cursor-pointer px-4 py-2 hover:bg-sky-100"
+            @click="selectCategory(cat)"
+          >
+            {{ cat.name }}
+          </li>
+        </ul>
+        <ul
+          v-else-if="categoryName && !categoryId"
+          class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
+        >
+          <li class="px-4 py-2">{{ $t('Nothing found') }}</li>
+        </ul>
+      </div>
+
+      <div v-if="categoryId" class="grid grid-cols-2 gap-4">
         <div class="relative">
           <label for="name" class="ms-1 text-sm">{{ $t('Name') }}<sup class="text-red-500">*</sup></label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
@@ -113,7 +114,8 @@
           <p v-if="errorField === 'description'" class="ms-1 mt-1 text-xs text-red-500">{{ errorResponse }}</p>
         </div>
       </div>
-      <div class="mt-4 flex justify-end">
+
+      <div v-if="categoryId" class="mt-4 flex justify-end">
         <button
           type="submit"
           class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600"
@@ -140,7 +142,7 @@ const filteredCategories = ref([])
 const config = useRuntimeConfig()
 const loadingCreateSubcategory = ref(false)
 
-const { data, status, error } = await useLazyFetch(config.public.backendUrl + `/admin/category/get-categories`, {
+const { data, status, error, refresh } = await useLazyFetch(config.public.backendUrl + `/admin/category/get-categories`, {
   timeout: 5000
 })
 
@@ -192,7 +194,9 @@ const createSubcategory = async () => {
       errorResponse.value = response.error
       errorField.value = response.field
     } else {
+      refresh()
       successResponse.value = response.message
+      categoryId.value = ''
       categoryName.value = ''
       name.value = ''
       slug.value = ''
