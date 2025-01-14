@@ -194,13 +194,13 @@ const createSubcategory = async () => {
       errorResponse.value = response.error
       errorField.value = response.field
     } else {
-      refresh()
       successResponse.value = response.message
-      categoryId.value = ''
-      categoryName.value = ''
       name.value = ''
       slug.value = ''
       description.value = ''
+      categoryName.value = ''
+      categoryId.value = ''
+      refresh()
     }
   } catch (error) {
     showError({
