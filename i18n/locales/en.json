@@ -6,5 +6,7 @@
   "Create": "Create",
   "Create subcategory": "Create subcategory",
   "Nothing found": "Nothing found",
-  "Parent category name": "Parent category name"
+  "Parent category name": "Parent category name",
+  "The name field is required.": "The name field is required.",
+  "The description field is required.": "The description field is required."
 }

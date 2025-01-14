@@ -2,9 +2,11 @@
   "Create category": "Создать категорию",
   "Name": "Название",
   "Slug": "URL-ярлык",
-  "Description SEO": "Описание SEO",
+  "Description SEO": "Описание для SEO",
   "Create": "Создать",
   "Create subcategory": "Создать подкатегорию",
   "Nothing found": "Ничего не найдено",
-  "Parent category name": "Название родительской категории"
+  "Parent category name": "Название родительской категории",
+  "The name field is required.": "Поле название является обязательным для заполнения.",
+  "The description field is required.": "Поле описание для SEO является обязательным для заполнения."
 }
