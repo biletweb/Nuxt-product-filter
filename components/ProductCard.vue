@@ -19,7 +19,7 @@
         class="rounded-lg"
       >
         <img v-if="isLoaded" v-bind="imgAttrs" :src="src" />
-        <div v-else class="h-[118px] animate-pulse rounded-lg bg-slate-300"></div>
+        <NuxtImg v-else src="/product/no-image.png" width="210" height="120" class="rounded-lg" />
       </NuxtImg>
     </div>
     <div class="mb-4 flex-grow">
