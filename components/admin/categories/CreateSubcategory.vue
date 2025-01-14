@@ -16,7 +16,7 @@
           <Icon v-if="status === 'pending'" name="svg-spinners:8-dots-rotate" size="24px" class="text-sky-500" />
           <Icon v-else-if="filteredCategories.length" name="mingcute:down-fill" size="24px" class="text-gray-400" />
           <Icon v-else-if="!parentCategoryName" name="mingcute:left-fill" size="24px" class="text-gray-400" />
-          <Icon v-else-if="parentCategoryId" name="mingcute:check-circle-line" size="24px" class="text-green-300" />
+          <Icon v-else-if="parentCategoryId" name="mingcute:check-fill" size="24px" class="text-green-300" />
         </div>
         <input
           v-model="parentCategoryName"
