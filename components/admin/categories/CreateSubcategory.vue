@@ -15,11 +15,11 @@
         <div class="absolute right-2.5 top-[33px] text-gray-400">
           <Icon v-if="status === 'pending'" name="svg-spinners:8-dots-rotate" size="24px" class="text-sky-500" />
           <Icon v-else-if="filteredCategories.length" name="mingcute:down-fill" size="24px" class="text-gray-400" />
-          <Icon v-else-if="!categoryName" name="mingcute:left-fill" size="24px" class="text-gray-400" />
-          <Icon v-else-if="categoryId" name="mingcute:check-circle-line" size="24px" class="text-green-300" />
+          <Icon v-else-if="!parentCategoryName" name="mingcute:left-fill" size="24px" class="text-gray-400" />
+          <Icon v-else-if="parentCategoryId" name="mingcute:check-circle-line" size="24px" class="text-green-300" />
         </div>
         <input
-          v-model="categoryName"
+          v-model="parentCategoryName"
           type="text"
           name="category"
           id="category"
@@ -48,14 +48,14 @@
           </li>
         </ul>
         <ul
-          v-else-if="categoryName && !categoryId"
+          v-else-if="parentCategoryName && !parentCategoryId"
           class="absolute z-10 mt-2 max-h-40 w-full overflow-y-auto rounded-lg border bg-white"
         >
           <li class="px-4 py-2">{{ $t('Nothing found') }}</li>
         </ul>
       </div>
 
-      <div v-if="categoryId" class="grid grid-cols-2 gap-4">
+      <div v-if="parentCategoryId" class="grid grid-cols-2 gap-4">
         <div class="relative">
           <label for="name" class="ms-1 text-sm">{{ $t('Name') }}<sup class="text-red-500">*</sup></label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
@@ -115,13 +115,13 @@
         </div>
       </div>
 
-      <div v-if="categoryId" class="mt-4 flex justify-end">
+      <div v-if="parentCategoryId" class="mt-4 flex justify-end">
         <button
           type="submit"
           class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600"
-          :disabled="loadingCreateSubcategory"
+          :disabled="loading"
         >
-          <Icon v-if="loadingCreateSubcategory" name="svg-spinners:8-dots-rotate" size="24px" class="flex" />
+          <Icon v-if="loading" name="svg-spinners:8-dots-rotate" size="24px" class="flex" />
           <span v-else>{{ $t('Create') }}</span>
         </button>
       </div>
@@ -130,17 +130,17 @@
 </template>
 
 <script setup>
-const categoryName = ref('')
+const parentCategoryName = ref('')
 const name = ref('')
 const slug = ref('')
 const description = ref('')
-const categoryId = ref('')
+const parentCategoryId = ref('')
 const successResponse = ref(null)
 const errorResponse = ref(null)
 const errorField = ref(null)
 const filteredCategories = ref([])
 const config = useRuntimeConfig()
-const loadingCreateSubcategory = ref(false)
+const loading = ref(false)
 
 const { data, status, error, refresh } = await useLazyFetch(config.public.backendUrl + `/admin/category/get-categories`, {
   timeout: 5000
@@ -154,14 +154,14 @@ if (error.value) {
 }
 
 const handleCategoryInput = () => {
-  categoryId.value = ''
+  parentCategoryId.value = ''
   filterCategories()
 }
 
 const filterCategories = () => {
-  if (categoryName.value) {
+  if (parentCategoryName.value) {
     filteredCategories.value = data.value.categories.filter((cat) =>
-      cat.name.toLowerCase().includes(categoryName.value.toLowerCase())
+      cat.name.toLowerCase().includes(parentCategoryName.value.toLowerCase())
     )
   } else {
     filteredCategories.value = []
@@ -169,13 +169,13 @@ const filterCategories = () => {
 }
 
 const selectCategory = (category) => {
-  categoryName.value = category.name
-  categoryId.value = category.id
+  parentCategoryName.value = category.name
+  parentCategoryId.value = category.id
   filteredCategories.value = []
 }
 
 const createSubcategory = async () => {
-  loadingCreateSubcategory.value = true
+  loading.value = true
   errorField.value = null
   errorResponse.value = null
   successResponse.value = null
@@ -186,7 +186,7 @@ const createSubcategory = async () => {
         name: name.value,
         slug: slug.value,
         description: description.value,
-        categoryId: categoryId.value
+        categoryId: parentCategoryId.value
       },
       timeout: 5000
     })
@@ -198,8 +198,8 @@ const createSubcategory = async () => {
       name.value = ''
       slug.value = ''
       description.value = ''
-      categoryName.value = ''
-      categoryId.value = ''
+      parentCategoryName.value = ''
+      parentCategoryId.value = ''
       refresh()
     }
   } catch (error) {
@@ -208,7 +208,7 @@ const createSubcategory = async () => {
       statusMessage: error.response?._data?.name || error.statusMessage || 'Request aborted due to timeout'
     })
   } finally {
-    loadingCreateSubcategory.value = false
+    loading.value = false
   }
 }
 </script>
