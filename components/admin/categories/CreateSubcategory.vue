@@ -8,7 +8,7 @@
     </div>
     <form @submit.prevent="createSubcategory">
       <div class="relative">
-        <label for="category" class="ms-1 text-sm"> {{ $t('Name') }}<sup class="text-red-500">*</sup> </label>
+        <label for="category" class="ms-1 text-sm"> {{ $t('Parent category name') }}<sup class="text-red-500">*</sup> </label>
         <div class="absolute left-2.5 top-[33px] text-gray-400">
           <Icon name="mingcute:folder-open-line" size="24px" />
         </div>
@@ -23,7 +23,7 @@
           type="text"
           name="category"
           id="category"
-          :placeholder="$t('Name')"
+          :placeholder="$t('Parent category name')"
           class="w-full rounded-lg border p-2 pl-10 pr-8 focus:outline-none"
           :class="{
             'focus:border-sky-500': errorField !== 'category',
