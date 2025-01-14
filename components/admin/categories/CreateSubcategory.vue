@@ -54,8 +54,7 @@
           <li class="px-4 py-2">{{ $t('Nothing found') }}</li>
         </ul>
       </div>
-
-      <div v-if="parentCategoryId" class="grid grid-cols-2 gap-4">
+      <div v-if="parentCategoryId" class="my-4 grid grid-cols-2 gap-4">
         <div class="relative">
           <label for="name" class="ms-1 text-sm">{{ $t('Name') }}<sup class="text-red-500">*</sup></label>
           <div class="absolute left-2.5 top-[33px] text-gray-400">
@@ -116,11 +115,7 @@
       </div>
 
       <div v-if="parentCategoryId" class="mt-4 flex justify-end">
-        <button
-          type="submit"
-          class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600"
-          :disabled="loading"
-        >
+        <button type="submit" class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600" :disabled="loading">
           <Icon v-if="loading" name="svg-spinners:8-dots-rotate" size="24px" class="flex" />
           <span v-else>{{ $t('Create') }}</span>
         </button>
