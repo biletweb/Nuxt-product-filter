@@ -9,7 +9,7 @@
           :value="value.id"
           :checked="isChecked(filter.id, value.id)"
           class="h-4 w-4 cursor-pointer appearance-none rounded border border-sky-500 bg-white checked:bg-sky-500"
-          @change="(handleFilterChange(filter.id, value.id), submitFilters())"
+          @change="handleFilterChange(filter.id, value.id)"
         />
         <span v-if="isChecked(filter.id, value.id)" class="pointer-events-none absolute ms-[2px] text-white">
           <Icon name="mingcute:check-line" size="12px" />
@@ -33,32 +33,30 @@ const props = defineProps({
 const emit = defineEmits(['filterChange'])
 const route = useRoute()
 const router = useRouter()
-const selectedFilters = reactive({ ...parseFiltersFromQuery(route.query) })
+const selectedFilters = ref(parseFiltersFromQuery(route.query))
 
 const handleFilterChange = (filterId, valueId) => {
-  if (!selectedFilters[filterId]) {
-    selectedFilters[filterId] = []
-  }
-  const filter = selectedFilters[filterId]
-  if (filter.includes(valueId)) {
-    const index = filter.indexOf(valueId)
-    filter.splice(index, 1)
-    if (filter.length === 0) {
-      delete selectedFilters[filterId]
-    }
-  } else {
+  const filter = (selectedFilters.value[filterId] ||= [])
+  const index = filter.indexOf(valueId)
+  if (index === -1) {
     filter.push(valueId)
+  } else {
+    filter.splice(index, 1)
+    if (!filter.length) {
+      delete selectedFilters.value[filterId]
+    }
   }
+  submitFilters()
 }
 
 const submitFilters = () => {
-  const query = buildQueryFromFilters(selectedFilters)
+  const query = buildQueryFromFilters(selectedFilters.value)
   router.push({ query })
-  emit('filterChange', selectedFilters)
+  emit('filterChange', selectedFilters.value)
 }
 
 const isChecked = (filterId, valueId) => {
-  return selectedFilters[filterId]?.includes(valueId) || false
+  return selectedFilters.value[filterId]?.includes(valueId) || false
 }
 
 function parseFiltersFromQuery(query) {
@@ -69,17 +67,11 @@ function parseFiltersFromQuery(query) {
   return filters
 }
 
-function buildQueryFromFilters(filters) {
-  const query = {}
-  for (const [key, values] of Object.entries(filters)) {
-    query[key] = values
-  }
-  return query
-}
+const buildQueryFromFilters = (filters) => ({ ...filters })
 
 onMounted(() => {
   if (Object.keys(route.query).length > 0) {
-    emit('filterChange', selectedFilters)
+    emit('filterChange', selectedFilters.value)
   }
 })
 </script>
