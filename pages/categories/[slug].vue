@@ -120,16 +120,8 @@ const filterChange = async (filters) => {
       params: params,
       timeout: 5000
     })
-    if (!response.products.length) {
-      hasMore.value = false
-      data.value.products = []
-      return
-    }
     data.value.products = response.products
     hasMore.value = response.products.length >= limit
-    if (!response.products.length) {
-      router.push('/categories')
-    }
   } catch (error) {
     showError({
       statusCode: error.statusCode,
