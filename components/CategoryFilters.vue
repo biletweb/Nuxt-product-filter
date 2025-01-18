@@ -51,7 +51,7 @@ const handleFilterChange = (filterId, valueId) => {
 
 const submitFilters = () => {
   const query = buildQueryFromFilters(selectedFilters.value)
-  router.push({ query })
+  router.replace({ query })
   emit('filterChange', selectedFilters.value)
 }
 
@@ -73,5 +73,9 @@ onMounted(() => {
   if (Object.keys(route.query).length > 0) {
     emit('filterChange', selectedFilters.value)
   }
+})
+
+onUnmounted(() => {
+  router.replace({ query: {} })
 })
 </script>
