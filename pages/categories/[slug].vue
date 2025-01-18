@@ -137,8 +137,9 @@ const loadMoreFilter = async (filters) => {
 let timeout
 
 const updateFilters = (filters) => {
-  isFilterOn.value = true
-  if (Object.keys(filters).length === 0) {
+  if (Object.keys(filters).length) {
+    isFilterOn.value = true
+  } else {
     offset.value = 0
     isFilterOn.value = false
   }
@@ -146,6 +147,7 @@ const updateFilters = (filters) => {
   offsetFilter.value = -1
   clearTimeout(timeout)
   timeout = setTimeout(() => {
+    hasMore.value = false
     data.value.products = []
     filterChange(activeFilters.value)
   }, 800)
