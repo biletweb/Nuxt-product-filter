@@ -23,14 +23,19 @@
           <Icon name="svg-spinners:8-dots-rotate" size="36px" class="text-sky-500" />
         </div>
         <ProductList v-else :products="data.products" />
-        <div v-if="hasMore && !loadingChangeFilters" class="mt-4 text-center">
+        <div v-if="hasMore" class="mt-4 text-center">
           <button
-            @click="loadMore"
+            @click="isFilterOn ? loadMoreFilter(activeFilters) : loadMore()"
             type="button"
             class="rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600 disabled:bg-slate-300"
-            :disabled="loadingHasMore"
+            :disabled="loadingHasMore || loadingChangeFilters"
           >
-            <Icon v-if="loadingHasMore" name="svg-spinners:8-dots-rotate" size="24px" class="flex items-center" />
+            <Icon
+              v-if="loadingHasMore || loadingChangeFilters"
+              name="svg-spinners:8-dots-rotate"
+              size="24px"
+              class="flex items-center"
+            />
             <span v-else>Load more</span>
           </button>
         </div>
@@ -44,7 +49,12 @@ const config = useRuntimeConfig()
 const categorySlug = useRoute().params.slug
 const seoUrl = config.public.frontendUrl + useRoute().fullPath
 const offset = ref(0)
-const limit = 10
+const limit = 1
+const offsetFilter = ref(0)
+const limitFilter = 1
+const isFilterOn = ref(false)
+const activeFilters = ref(null)
+const filteredProducts = ref([])
 const hasMore = ref(true)
 const loadingHasMore = ref(false)
 const loadingChangeFilters = ref(false)
@@ -97,30 +107,66 @@ const loadMore = async () => {
   }
 }
 
-let timeout
-
-const updateFilters = (filters) => {
-  clearTimeout(timeout)
-  timeout = setTimeout(() => {
-    filterChange(filters)
-  }, 800)
-}
-
-const filterChange = async (filters) => {
-  loadingChangeFilters.value = true
-  offset.value = 0
+const loadMoreFilter = async (filters) => {
+  loadingHasMore.value = true
+  offsetFilter.value += limitFilter
   try {
     const params = {}
     for (const [filterId, selectedValues] of Object.entries(filters)) {
       params[`filters[${filterId}][]`] = selectedValues
     }
-    params.offset = offset.value
-    params.limit = limit
+    params.offset = offsetFilter.value
+    params.limit = limitFilter
     const response = await $fetch(config.public.backendUrl + `/categories/${categorySlug}/products/filter`, {
       params: params,
       timeout: 5000
     })
-    data.value.products = response.products
+    filteredProducts.value = response.products
+    data.value.products = [...data.value.products, ...filteredProducts.value]
+    hasMore.value = response.products.length >= limit
+  } catch (error) {
+    showError({
+      statusCode: error.statusCode,
+      statusMessage: error.response?._data?.name || error.statusMessage || 'Request aborted due to timeout'
+    })
+  } finally {
+    loadingHasMore.value = false
+  }
+}
+
+let timeout
+
+const updateFilters = (filters) => {
+  isFilterOn.value = true
+  if (Object.keys(filters).length === 0) {
+    offset.value = 0
+    isFilterOn.value = false
+  }
+  activeFilters.value = filters
+  offsetFilter.value = -1
+  clearTimeout(timeout)
+  timeout = setTimeout(() => {
+    data.value.products = []
+    filterChange(activeFilters.value)
+  }, 800)
+}
+
+const filterChange = async (filters) => {
+  loadingChangeFilters.value = true
+  offsetFilter.value += limitFilter
+  try {
+    const params = {}
+    for (const [filterId, selectedValues] of Object.entries(filters)) {
+      params[`filters[${filterId}][]`] = selectedValues
+    }
+    params.offset = offsetFilter.value
+    params.limit = limitFilter
+    const response = await $fetch(config.public.backendUrl + `/categories/${categorySlug}/products/filter`, {
+      params: params,
+      timeout: 5000
+    })
+    filteredProducts.value = response.products
+    data.value.products = [...data.value.products, ...filteredProducts.value]
     hasMore.value = response.products.length >= limit
   } catch (error) {
     showError({
